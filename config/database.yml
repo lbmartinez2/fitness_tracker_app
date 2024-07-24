@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV['PGUSER'] %>
+  password: <%= ENV['PGPASSWORD'] %>
+  host: <%= ENV['PGHOST'] %>
+
+development:
+  <<: *default
+  database: fitness_tracker_app_development
+
+test:
+  <<: *default
+  database: fitness_tracker_app_test
+
+production:
+  <<: *default
+  database: fitness_tracker_app_production
