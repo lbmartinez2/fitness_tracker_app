@@ -3,9 +3,9 @@ module CalorieNinjas
         BASE_URL = "https://api.calorieninjas.com/v1/nutrition?query="
         TOKEN = ENV['API_KEY']
 
-      def self.call(http_method, params = {})
+      def self.call(http_method, query = {})
         url = "#{BASE_URL}"
-        url += "#{params.to_s}" unless params.empty?
+        url += "#{query.to_s}" unless query.empty?
 
         result = RestClient::Request.execute(
           method: http_method,
