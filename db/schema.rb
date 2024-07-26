@@ -17,6 +17,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_185304) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.integer "age"
+    t.string "sex"
+    t.date "birthday"
+    t.integer "height"
+    t.integer "weight"
+    t.integer "target_weight"
+    t.date "target_date"
+    t.integer "exercise_goals"
+    t.string "current_activity_level"
+    t.boolean "full_time_job"
+    t.string "weight_loss_reason"
+    t.boolean "subscribe_to_updates"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
