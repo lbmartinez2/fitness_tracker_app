@@ -1,4 +1,4 @@
-module CalorieNinjas
+module Nutritionix
   class Errors
     def self.map(code)
       case code
