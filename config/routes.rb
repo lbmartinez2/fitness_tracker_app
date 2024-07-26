@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   
   namespace :api do
     get '/nutrition_facts/:query', to: 'nutrition_facts#index'
+    get '/exercise/:query', to: 'exercise#index'
   end
   # Defines the root path route ("/")
   # root "posts#index"
