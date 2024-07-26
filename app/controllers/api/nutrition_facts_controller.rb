@@ -2,7 +2,8 @@ module Api
   class NutritionFactsController < ApplicationController
     def index
       nutrition_facts = CalorieNinjas::Client.nutrition_facts(params[:query])
-      render json: nutrition_facts[:data].first[1].map { |item| item["name"] }
+      render json: nutrition_facts[:data]
+      #.first[1].map { |item| item["name"] }
     end
 
     #   BMR Calculations
