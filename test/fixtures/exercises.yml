@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: MyString
+  type: 
+  duration: 1
+  calories_burnt: 1
+
+two:
+  date: MyString
+  type: 
+  duration: 1
+  calories_burnt: 1
