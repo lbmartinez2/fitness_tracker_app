@@ -67,6 +67,5 @@ group :test do
 end
 
 gem 'devise'
-
 gem "rest-client"
 gem "dotenv"
