@@ -13,5 +13,5 @@ Rails.application.routes.draw do
     get '/exercise/:query', to: 'exercise#index'
   end
   # Defines the root path route ("/")
-  # root "posts#index"
+   root "home#index"
 end
