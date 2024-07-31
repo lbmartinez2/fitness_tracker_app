@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
   
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
+
+  devise_scope :user do  
+    get '/users/sign_out' => 'devise/sessions#destroy'     
+ end
 
   namespace :api do
     get '/nutrition_facts/:query', to: 'nutrition_facts#index'

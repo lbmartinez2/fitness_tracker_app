@@ -10,6 +10,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :exercises, dependent: :destroy
+  has_many :consumptions, dependent: :destroy
 
   validates :name, presence: true
 end
