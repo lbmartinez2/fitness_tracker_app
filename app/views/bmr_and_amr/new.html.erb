@@ -1,0 +1,46 @@
+<h1>BMR & AMR Calculator</h1>
+
+<%= form_with url: calculate_metabolic_rate_path, method: :post, local: true do |f| %>
+  <div>
+    <%= f.label :weight, "Weight (kg)" %>
+    <%= f.number_field :weight, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :height, "Height (cm)" %>
+    <%= f.number_field :height, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :age, "Age" %>
+    <%= f.number_field :age, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :gender, "Gender" %>
+    <%= f.select :gender, [['Male', 'male'], ['Female', 'female']], required: true %>
+  </div>
+
+  <div>
+    <%= f.label :activity_level, "Activity Level" %>
+    <%= f.select :activity_level, [
+      ['Sedentary', 1.2], 
+      ['Lightly active', 1.375], 
+      ['Moderately active', 1.55], 
+      ['Active', 1.725], 
+      ['Extremely active', 1.9]
+    ], required: true %>
+  </div>
+
+  <div>
+    <%= f.submit "Calculate" %>
+  </div>
+<% end %>
+
+<% if @result %>
+  <h2>Results</h2>
+  <p>BMR: <%= @result[:bmr].round(2) %> kcal/day</p>
+  <p>AMR: <%= @result[:amr].round(2) %> kcal/day</p>
+<% end %>
+
+

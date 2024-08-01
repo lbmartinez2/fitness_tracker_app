@@ -1,0 +1,2 @@
+module BmRandAmrHelper
+end
