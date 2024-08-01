@@ -1,0 +1,2 @@
+class BmRandAmrController < ApplicationController
+end
