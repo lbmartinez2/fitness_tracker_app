@@ -1,2 +1,3 @@
 <%= "HOME" %>
  <%= render 'layouts/navbar' %>
+ <%= current_user unless user_signed_in? %>
