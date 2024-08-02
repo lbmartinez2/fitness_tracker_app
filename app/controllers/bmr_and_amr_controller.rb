@@ -1,4 +1,4 @@
-class BmRandAmrController < ApplicationController
+class BmrandAmrController < ApplicationController
     def new
       # This method can render a form to input the necessary data
     end
@@ -25,7 +25,7 @@ class BmRandAmrController < ApplicationController
       respond_to do |format|
         format.html { render :new } # Assuming you want to render the new form with the result
         format.json { render json: @result }
-      end
+
     end
-  end
+end
   

@@ -1,6 +1,6 @@
 <h1>BMR & AMR Calculator</h1>
 
-<%= form_with url: calculate_metabolic_rate_path, method: :post, local: true do |f| %>
+<%= form_with url: calculate_bmr_and_amr_path, method: :post, local: true do |f| %>
   <div>
     <%= f.label :weight, "Weight (kg)" %>
     <%= f.number_field :weight, required: true %>
