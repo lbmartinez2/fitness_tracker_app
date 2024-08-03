@@ -1,4 +1,4 @@
-class BmRandAmrController < ApplicationController
+class BmrAndAmrController < ApplicationController
     def new
       # This method can render a form to input the necessary data
     end
@@ -7,7 +7,7 @@ class BmRandAmrController < ApplicationController
       weight = params[:weight].to_f
       height = params[:height].to_f
       age = params[:age].to_f
-      gender = params[:gender]
+      gender = current_user.sex
       activity_level_factor = params[:activity_level_factor].to_f
   
       # Calculate BMR

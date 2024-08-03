@@ -17,8 +17,8 @@ Rails.application.routes.draw do
     get '/exercise/:query', to: 'exercise#index'
   end
 
-  get 'metabolic_rates/new', to: 'metabolic_rates#new', as: 'new_metabolic_rate'
-  post 'metabolic_rates/calculate', to: 'metabolic_rates#calculate', as: 'calculate_metabolic_rate'
+  get 'bmr_and_amr/new', to: 'bmr_and_amr#new', as: 'new_bmr_and_amr'
+  post 'bmr_and_amr/calculate', to: 'bmr_and_amr#calculate', as: 'calculate_bmr_and_amr'
   # Defines the root path route ("/")
    root "home#index"
 end
