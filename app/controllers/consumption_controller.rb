@@ -68,4 +68,17 @@ class ConsumptionsController < ApplicationController
     def consumption_params
       params.require(:consumption).permit(:date, :food_name, :meal_type, :macros, :calories)
     end
+
+    def portfolio
+      @date = Date.today
+      @total_calories = Consumption.total_calories_for_day(@date)
+      @water_intake_status = Consumption.water_intake_status(current_user.id, @date)
+      @calorie_goal_status = Consumption.calorie_goal_status(current_user, @date)
+  
+      respond_to do |format|
+        format.html
+        format.json { render json: { total_calories: @total_calories, water_intake_status: @water_intake_status, calorie_goal_status: @calorie_goal_status } }
+      end
+    end
+    
 end
