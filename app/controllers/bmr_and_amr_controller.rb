@@ -1,22 +1,15 @@
-
-
-
+# app/controllers/bmr_and_amr_controller.rb
 class BmrAndAmrController < ApplicationController
     def new
-      # Logic for new form, if needed
+
     end
   
     def calculate
       weight = params[:weight].to_f
       height = params[:height].to_f
       age = params[:age].to_f
-
       gender = current_user.sex
-      
-
-      
       activity_level = params[:activity_level]
-
   
       # Calculate BMR
       @bmr = if gender == 'male'
@@ -25,7 +18,7 @@ class BmrAndAmrController < ApplicationController
                447.593 + (9.247 * weight) + (3.096 * height) - (4.330 * age)
              end
   
-      # Calculate AMR using switch-case for activity levels
+      # Calculate AMR using switch-case for activity levels 
       @amr = case activity_level
              when 'sedentary'
                @bmr * 1.2
