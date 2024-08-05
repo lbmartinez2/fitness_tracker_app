@@ -1,0 +1,21 @@
+<!-- app/views/bmr_and_amr/show.html.erb -->
+<h1>BMR and AMR Results</h1>
+
+<div class="results">
+  <p><strong>BMR:</strong> <%= @bmr.round(2) %> kcal/day</p>
+  <p><strong>AMR:</strong> <%= @amr.round(2) %> kcal/day</p>
+</div>
+
+<h2>Daily Summary</h2>
+
+<div class="water-intake">
+  <p><strong>Glasses of Water:</strong> <%= @glasses_of_water %></p>
+  <p><%= @water_message %></p>
+</div>
+
+<div class="calorie-status" style="color: <%= @calorie_status[:color] %>;">
+  <p><strong>Calorie Status:</strong> <%= @calorie_status[:message] %></p>
+  <p><strong>Total Calories Today:</strong> <%= @calories_today %> kcal</p>
+</div>
+
+<%= link_to "Back to Calculator", new_bmr_and_amr_path, class: "btn btn-primary" %>

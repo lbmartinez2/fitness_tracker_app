@@ -1,46 +1,39 @@
-<h1>BMR & AMR Calculator</h1>
+<!-- app/views/bmr_and_amr/new.html.erb -->
+<h1>BMR and AMR Calculator</h1>
 
-<%= form_with url: calculate_metabolic_rate_path, method: :post, local: true do |f| %>
-  <div>
-    <%= f.label :weight, "Weight (kg)" %>
-    <%= f.number_field :weight, required: true %>
+<%= form_with url: calculate_bmr_and_amr_path, method: :post, local: true do %>
+  <div class="field">
+    <%= label_tag :weight, "Weight (kg)" %>
+    <%= text_field_tag :weight %>
   </div>
 
-  <div>
-    <%= f.label :height, "Height (cm)" %>
-    <%= f.number_field :height, required: true %>
+  <div class="field">
+    <%= label_tag :height, "Height (cm)" %>
+    <%= text_field_tag :height %>
   </div>
 
-  <div>
-    <%= f.label :age, "Age" %>
-    <%= f.number_field :age, required: true %>
+  <div class="field">
+    <%= label_tag :age, "Age" %>
+    <%= text_field_tag :age %>
   </div>
 
-  <div>
-    <%= f.label :gender, "Gender" %>
-    <%= f.select :gender, [['Male', 'male'], ['Female', 'female']], required: true %>
+  <div class="field">
+    <%= label_tag :gender, "Gender" %>
+    <%= select_tag :gender, options_for_select([['Male', 'male'], ['Female', 'female']]) %>
   </div>
 
-  <div>
-    <%= f.label :activity_level, "Activity Level" %>
-    <%= f.select :activity_level, [
-      ['Sedentary', 1.2], 
-      ['Lightly active', 1.375], 
-      ['Moderately active', 1.55], 
-      ['Active', 1.725], 
-      ['Extremely active', 1.9]
-    ], required: true %>
+  <div class="field">
+    <%= label_tag :activity_level, "Activity Level" %>
+    <%= select_tag :activity_level, options_for_select([
+      ['Sedentary (little or no exercise)', 'sedentary'],
+      ['Lightly Active (exercise 1-3 days/week)', 'lightly_active'],
+      ['Moderately Active (exercise 3-5 days/week)', 'moderately_active'],
+      ['Active (exercise 6-7 days/week)', 'active'],
+      ['Extremely Active (hard exercise 6-7 days/week)', 'extremely_active']
+    ]) %>
   </div>
 
-  <div>
-    <%= f.submit "Calculate" %>
+  <div class="actions">
+    <%= submit_tag "Calculate" %>
   </div>
 <% end %>
-
-<% if @result %>
-  <h2>Results</h2>
-  <p>BMR: <%= @result[:bmr].round(2) %> kcal/day</p>
-  <p>AMR: <%= @result[:amr].round(2) %> kcal/day</p>
-<% end %>
-
-
