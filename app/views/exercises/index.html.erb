@@ -2,6 +2,25 @@
 
 <h1>Exercises</h1>
 
+<%= form_with(url: exercises_path, method: :get, local: true) do |search_form| %>
+  <div class="field">
+    <%= search_form.label :q, "Search Exercise" %>
+    <%= search_form.text_field :q %>
+  </div>
+  <div class="actions">
+    <%= search_form.submit "Search" %>
+  </div>
+<% end %>
+
+<% if @searched_exercise %>
+  <div>
+    <h3>Exercise Found:</h3>
+    <p><strong>Name:</strong> <%= @searched_exercise["name"] %></p>
+    <p><strong>Current Duration:</strong> <%= @searched_exercise["duration_min"] %> minutes</p>
+    <p><strong>Current Calories Burnt:</strong> <%= @searched_exercise["nf_calories"] %> kcal</p>
+  </div>
+<% end %>
+
 <div id="exercises">
   <% @exercises.each do |exercise| %>
     <%= render exercise %>
@@ -10,5 +29,6 @@
     </p>
   <% end %>
 </div>
+
 
 <%= link_to "New exercise", new_exercise_path %>

@@ -15,7 +15,7 @@
 
   <div class="field">
     <%= f.label :sex %>
-    <%= f.text_field :sex %>
+    <%= f.select :sex, options_for_select([["Male", "male"], ["Female", "female"], ["Other", "other"]]) %>
   </div>
 
   <div class="field">

@@ -1,4 +1,6 @@
-# app/controllers/bmr_and_amr_controller.rb
+
+
+
 class BmrAndAmrController < ApplicationController
     def new
       # Logic for new form, if needed
@@ -8,8 +10,13 @@ class BmrAndAmrController < ApplicationController
       weight = params[:weight].to_f
       height = params[:height].to_f
       age = params[:age].to_f
-      gender = params[:gender]
+
+      gender = current_user.sex
+      
+
+      
       activity_level = params[:activity_level]
+
   
       # Calculate BMR
       @bmr = if gender == 'male'
