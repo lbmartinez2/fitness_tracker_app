@@ -1,8 +1,9 @@
 class ExercisesController < ApplicationController
-  before_action :set_exercise, only: %i[ show edit update destroy ]
+  before_action :set_exercise, only: %i[ show edit update destroy]
 
   # GET /exercises or /exercises.json
   def index
+    @searched_exercise = search_exercise(params[:q])
     @exercises = Exercise.all
   end
 
@@ -14,6 +15,8 @@ class ExercisesController < ApplicationController
   def new
     @exercise = current_user.exercises.build
   end
+
+
 
   # GET /exercises/1/edit
   def edit
@@ -66,5 +69,10 @@ class ExercisesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def exercise_params
       params.require(:exercise).permit(:date, :exercise_type, :duration, :calories_burnt)
+    end
+
+    def search_exercise(name)
+      data = Nutritionix::Client.exercise(name)
+      data[:data].first[1][0]
     end
 end

@@ -1,7 +1,7 @@
 # app/controllers/bmr_and_amr_controller.rb
 class BmrAndAmrController < ApplicationController
     def new
-      # Logic for new form, if needed
+
     end
   
     def calculate
@@ -18,7 +18,7 @@ class BmrAndAmrController < ApplicationController
                447.593 + (9.247 * weight) + (3.096 * height) - (4.330 * age)
              end
   
-      # Calculate AMR using switch-case for activity levels
+      # Calculate AMR using switch-case for activity levels 
       @amr = case activity_level
              when 'sedentary'
                @bmr * 1.2

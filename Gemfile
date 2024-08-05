@@ -69,3 +69,7 @@ end
 gem 'devise'
 gem "rest-client"
 gem "dotenv"
+gem 'rails_charts'
+gem 'bootstrap', '~> 4.3.1'
+gem 'jquery-rails'
+
