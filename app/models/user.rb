@@ -10,5 +10,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :exercises, dependent: :destroy
-  hams_many :consumptions, dependent: :destroy
+  has_many :consumptions, dependent: :destroy
 end
