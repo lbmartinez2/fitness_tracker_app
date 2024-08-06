@@ -1,11 +1,30 @@
 
-<% if user_signed_in? %>
-  <%= link_to "Sign Out", destroy_user_session_path, class:"btn btn-primary" %>
-  <%= link_to "Exercise", new_exercise_path , class:"btn btn-primary" %>
-  <%= link_to "Meal", "#", class:"btn btn-primary" %>
-    <%= current_user.email %>
-    <%= current_user.exercises %>
-<% else %>
-  <%= link_to "Sign In", new_user_session_path, class:"btn btn-primary" %>
-<% end %>
+# <% if user_signed_in? %>
+#   <%= link_to "Sign Out", destroy_user_session_path, class:"btn btn-primary" %>
+#   <%= link_to "Exercise", new_exercise_path , class:"btn btn-primary" %>
+#   <%= link_to "Meal", new_bmr_and_amr_path, class:"btn btn-primary" %>
+#     <%= current_user.email %>
+#     <%= current_user.exercises %>
+# <% else %>
+#   <%= link_to "Sign In", new_user_session_path, class:"btn btn-primary" %>
+# <% end %>
 
+<% if user_signed_in? %>
+  <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
+  <%= link_to "Exercise", new_exercise_path, class: "btn btn-primary" %>
+  <%= link_to "Meal", new_bmr_and_amr_path, class: "btn btn-primary" %>
+
+  <div>
+    <p>Email: <%= current_user.email %></p>
+    <p>Exercises:</p>
+    <ul>
+      <% current_user.exercises.each do |exercise| %>
+        <li><%= exercise.name %></li>
+      <% end %>
+    </ul>
+  </div>
+<% else %>
+  <!-- Show sign-in/sign-up links if the user is not signed in -->
+  <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary" %>
+  <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+<% end %>

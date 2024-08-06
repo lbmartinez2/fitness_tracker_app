@@ -1,38 +1,6 @@
 <!-- app/views/bmr_and_amr/new.html.erb -->
 <h1>BMR and AMR Calculator</h1>
 
-<<<<<<< HEAD
-<%= form_with url: calculate_bmr_and_amr_path, method: :post, local: true do %>
-  <div class="field">
-    <%= label_tag :weight, "Weight (kg)" %>
-    <%= text_field_tag :weight %>
-  </div>
-
-  <div class="field">
-    <%= label_tag :height, "Height (cm)" %>
-    <%= text_field_tag :height %>
-  </div>
-
-  <div class="field">
-    <%= label_tag :age, "Age" %>
-    <%= text_field_tag :age %>
-  </div>
-
-  <div class="field">
-    <%= label_tag :gender, "Gender" %>
-    <%= select_tag :gender, options_for_select([['Male', 'male'], ['Female', 'female']]) %>
-  </div>
-
-  <div class="field">
-    <%= label_tag :activity_level, "Activity Level" %>
-    <%= select_tag :activity_level, options_for_select([
-      ['Sedentary (little or no exercise)', 'sedentary'],
-      ['Lightly Active (exercise 1-3 days/week)', 'lightly_active'],
-      ['Moderately Active (exercise 3-5 days/week)', 'moderately_active'],
-      ['Active (exercise 6-7 days/week)', 'active'],
-      ['Extremely Active (hard exercise 6-7 days/week)', 'extremely_active']
-    ]) %>
-=======
 <%= form_with url: calculate_bmr_and_amr_path, method: :post, local: true do |f| %>
   <div>
     <%= f.label :weight, "Weight (kg)" %>
@@ -63,7 +31,6 @@
       ['Active', 1.725], 
       ['Extremely Active', 1.9]
     ], { required: true } %>
->>>>>>> origin/exercise
   </div>
 
   <div class="actions">
