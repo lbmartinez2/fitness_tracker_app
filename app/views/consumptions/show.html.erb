@@ -1,2 +1,34 @@
-<h1>Consumption#show</h1>
-<p>Find me in app/views/consumption/show.html.erb</p>
+<h1>Food Details</h1>
+
+<div class="card">
+  <div class="card-header">
+    <h2><%= @consumption.food_name %></h2>
+  </div>
+  <div class="card-body">
+    <p><strong>Date:</strong> <%= @consumption.date %></p>
+    <p><strong>Meal Type:</strong> <%= @consumption.meal_type %></p>
+    <p><strong>Calories:</strong> <%= @consumption.calories %> kcal</p>
+    <p><strong>Macros:</strong></p>
+    <% if @consumption.macros.present? %>
+      <ul>
+        <% macros = JSON.parse(@consumption.macros) %>
+            <li>Protein: <%= macros["protein_g"] %>g</li>
+            <li>Carbs: <%= macros["carbohydrates_total_g"] %>g</li>
+            <li>Fat: <%= macros["fat_total_g"] %>g</li>
+            <li>Saturated Fat: <%= macros["fat_saturated_g"] %>g</li>
+            <li>Sodium: <%= macros["sodium_mg"] %>mg</li>
+            <li>Potassium: <%= macros["potassium_mg"] %>mg</li>
+            <li>Cholesterol: <%= macros["cholesterol_mg"] %>mg</li>
+            <li>Fiber: <%= macros["fiber_g"] %>g</li>
+            <li>Sugar: <%= macros["sugar_g"] %>g</li>
+        </ul>
+    <% else %>
+      <p>No macros available</p>
+    <% end %>
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Edit', edit_consumption_path(@consumption), class: "btn btn-primary" %>
+    <%= link_to 'Back', consumptions_path, class: "btn btn-secondary" %>
+    <%= link_to 'Delete', consumption_path(@consumption), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+  </div>
+</div>

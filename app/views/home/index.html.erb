@@ -12,6 +12,15 @@
       <% end %>
       </li>
       </ul>
+
+      <ul>
+    <% current_user.consumptions.each_with_index do |consumption, index| %>
+      <li><%= "Food #{index +1}: #{consumption.food_name}"%>
+      <%= "Date: #{consumption.date}"%>
+      <%= "Calories: #{consumption.calories} kcal"%>
+      <% end %>
+      </li>
+      </ul>
 <% else %>
   <%= link_to "Sign In", new_user_session_path, class:"btn btn-primary" %>
 <% end %>
