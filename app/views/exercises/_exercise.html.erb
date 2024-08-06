@@ -1,22 +1,18 @@
-<div id="<%= dom_id exercise %>">
-  <p>
-    <strong>Date:</strong>
-    <%= exercise.date %>
-  </p>
+<div id="<%= dom_id(exercise) %>" class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title">Exercise Details</h5>
+    <dl class="row">
+      <dt class="col-sm-3">Date:</dt>
+      <dd class="col-sm-9"><%= exercise.date %></dd>
 
-  <p>
-    <strong>Exercise Type:</strong>
-    <%= exercise.exercise_type %>
-  </p>
+      <dt class="col-sm-3">Exercise Type:</dt>
+      <dd class="col-sm-9"><%= exercise.exercise_type %></dd>
 
-  <p>
-    <strong>Duration:</strong>
-    <%= exercise.duration %>
-  </p>
+      <dt class="col-sm-3">Duration:</dt>
+      <dd class="col-sm-9"><%= exercise.duration %> minutes</dd>
 
-  <p>
-    <strong>Calories burnt:</strong>
-    <%= exercise.calories_burnt %>
-  </p>
-
+      <dt class="col-sm-3">Calories Burnt:</dt>
+      <dd class="col-sm-9"><%= exercise.calories_burnt %> kcal</dd>
+    </dl>
+  </div>
 </div>

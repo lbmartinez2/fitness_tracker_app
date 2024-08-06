@@ -18,6 +18,9 @@
     <p><strong>Name:</strong> <%= @searched_exercise["name"] %></p>
     <p><strong>Current Duration:</strong> <%= @searched_exercise["duration_min"] %> minutes</p>
     <p><strong>Current Calories Burnt:</strong> <%= @searched_exercise["nf_calories"] %> kcal</p>
+    <div>
+      <%= link_to "Add this exercise", new_exercise_path(searched_exercise: @searched_exercise), class: "btn btn-primary" %>
+    </div>
   </div>
 <% end %>
 
@@ -29,6 +32,5 @@
     </p>
   <% end %>
 </div>
-
 
 <%= link_to "New exercise", new_exercise_path %>

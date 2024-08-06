@@ -12,12 +12,23 @@ class ExercisesController < ApplicationController
   end
 
   # GET /exercises/new
+  
   def new
-    @exercise = current_user.exercises.build
+      @exercise = current_user.exercises.build
+    
+      if params[:searched_exercise].present?
+        @searched_exercise = params[:searched_exercise]
+        
+        @exercise.attributes = {
+          exercise_type: @searched_exercise["name"].titleize,
+          duration: @searched_exercise["duration_min"],
+          calories_burnt: @searched_exercise["nf_calories"]
+        }
+      else
+        @searched_exercise = nil
+      end
   end
-
-
-
+    
   # GET /exercises/1/edit
   def edit
   end
@@ -73,6 +84,10 @@ class ExercisesController < ApplicationController
 
     def search_exercise(name)
       data = Nutritionix::Client.exercise(name)
-      data[:data].first[1][0]
+      data = data[:data].first[1] ? data[:data].first[1][0] : { "name" => "Exercise not found",
+                                                             "duration_min" => 0,
+                                                             "nf_calories" => 0
+                                                            }
     end
+
 end

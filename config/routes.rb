@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get 'bmr_and_amr/new', to: 'bmr_and_amr#new', as: 'new_bmr_and_amr'
   post 'bmr_and_amr/calculate', to: 'bmr_and_amr#calculate', as: 'calculate_bmr_and_amr'
 
-  get 'bmr_and_amr/show', to: 'bmr_and_amr#show', as: 'show_bmr_and_amr
+  get 'bmr_and_amr/show', to: 'bmr_and_amr#show', as: 'show_bmr_and_amr'
 
   # Defines the root path route ("/")
   root "home#index"
