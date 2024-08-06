@@ -4,6 +4,7 @@ class ConsumptionsController < ApplicationController
   # GET /consumptions or /consumptions.json
   def index
     @consumptions = Consumption.all
+    @searched_consumptions = search_consumption(params[:q])
   end
 
   # GET /consumptions/1 or /consumptions/1.json
@@ -13,6 +14,18 @@ class ConsumptionsController < ApplicationController
   # GET /consumptions/new
   def new
     @consumption = current_user.consumptions.build
+
+    if params[:searched_consumption].present?
+      @searched_consumption = params[:searched_consumption]
+      @consumption.attributes = {
+        date: Date.today,
+        meal_type: "lunch", # You can change this to your desired meal type
+        calories: @searched_consumption["calories"],
+        macros: @searched_consumption
+      }
+    else
+      @searched_consumption = nil
+    end
   end
 
   # GET /consumptions/1/edit
@@ -66,19 +79,11 @@ class ConsumptionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def consumption_params
-      params.require(:consumption).permit(:date, :food_name, :meal_type, :macros, :calories)
+      params.require(:consumption).permit(:date, :meal_type, :calories, macros: {})
     end
 
-    def portfolio
-      @date = Date.today
-      @total_calories = Consumption.total_calories_for_day(@date)
-      @water_intake_status = Consumption.water_intake_status(current_user.id, @date)
-      @calorie_goal_status = Consumption.calorie_goal_status(current_user, @date)
-  
-      respond_to do |format|
-        format.html
-        format.json { render json: { total_calories: @total_calories, water_intake_status: @water_intake_status, calorie_goal_status: @calorie_goal_status } }
-      end
+    def search_consumption(name)
+      data = CalorieNinjas::Client.nutrition_facts(name)
+      data["items"]
     end
-    
 end

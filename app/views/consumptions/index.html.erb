@@ -1,0 +1,28 @@
+<h1>Consumption#index</h1>
+<p>Find me in app/views/consumption/index.html.erb</p>
+
+<%= form_with(url: consumptions_path, method: :get, local: true) do |search_form| %>
+  <div class="field">
+    <%= search_form.label :q, "Search Food" %>
+    <%= search_form.text_field :q %>
+  </div>
+  <div class="actions">
+    <%= search_form.submit "Search" %>
+  </div>
+<% end %>
+
+<% if @searched_consumptions %>
+  <div>
+    <h3>Food Found:</h3>
+    <ul>
+        <% @searched_consumptions.each do |food| %>
+        <li>
+          <strong>Name:</strong> <%= food["name"] %><br>
+          <strong>Serving Size:</strong> <%= "#{food["serving_size_g"]} g" %><br>
+          <strong>Calories:</strong> <%= "#{food["calories"]} kcal" %><br>
+          <%= link_to "Add this food", new_consumption_path(searched_consumption: food.to_json), class: "btn btn-primary" %>
+        </li>
+        <% end %>
+    </ul>
+  </div>
+<% end %>
