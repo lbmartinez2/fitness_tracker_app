@@ -1,14 +1,18 @@
 class BmrAndAmrController < ApplicationController
+    before_action :authenticate_user!
+  
     def new
-      # This method can render a form to input the necessary data
+
+      # Optional: Initialize any necessary variables or set up the form
     end
   
     def calculate
-      weight = params[:weight].to_f
-      height = params[:height].to_f
-      age = params[:age].to_f
+      weight = current_user.weight
+      height = current_user.height
+      age = current_user.age
       gender = current_user.sex
-      activity_level_factor = params[:activity_level_factor].to_f
+      activity_level = current_user.current_activity_level
+
   
       # Calculate BMR
       bmr = if gender == 'male'
@@ -17,8 +21,24 @@ class BmrAndAmrController < ApplicationController
               447.593 + (9.247 * weight) + (3.096 * height) - (4.330 * age)
             end
   
+
       # Calculate AMR
       amr = bmr * activity_level_factor
+
+      # Calculate AMR using switch-case for activity levels 
+      @amr = case activity_level
+             when 'Sedentary'
+               @bmr * 1.2
+             when 'Low Active'
+               @bmr * 1.375
+             when 'Active'
+               @bmr * 1.55
+             when 'Very Active'
+               @bmr * 1.725
+             else
+               @bmr # Default to BMR if activity level is not recognized
+             end
+
   
       @result = { bmr: bmr, amr: amr }
   
