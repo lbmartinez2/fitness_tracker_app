@@ -1,10 +1,12 @@
-<h1>Editing exercise</h1>
+<h1>Editing Exercise</h1>
 
-<%= render "form", exercise: @exercise %>
+<div class="card mt-4">
+  <div class="card-body p-4">
+    <%= render "form", exercise: @exercise %>
+  </div>
 
-<br>
-
-<div>
-  <%= link_to "Show this exercise", @exercise %> |
-  <%= link_to "Back to exercises", exercises_path %>
+  <div class="card-footer d-flex justify-content-between">
+    <%= link_to "Show this exercise", @exercise, class: "btn btn-info" %>
+    <%= link_to "Back to exercises", exercises_path, class: "btn btn-secondary" %>
+  </div>
 </div>

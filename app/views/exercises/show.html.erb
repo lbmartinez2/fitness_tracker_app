@@ -1,10 +1,14 @@
-<p style="color: green"><%= notice %></p>
+<p class="text-success"><%= notice %></p>
 
-<%= render @exercise %>
+<div class="card mt-4">
+  <div class="card-body">
+    <h5 class="card-title">Exercise Details</h5>
+    <%= render partial: 'exercise', locals: { exercise: @exercise } %>
+  </div>
 
-<div>
-  <%= link_to "Edit this exercise", edit_exercise_path(@exercise) %> |
-  <%= link_to "Back to exercises", exercises_path %>
-
-  <%= button_to "Destroy this exercise", @exercise, method: :delete %>
+  <div class="card-footer d-flex justify-content-between">
+    <%= link_to "Edit this exercise", edit_exercise_path(@exercise), class: "btn btn-primary" %>
+    <%= link_to "Back to exercises", exercises_path, class: "btn btn-secondary" %>
+    <%= button_to "Destroy this exercise", @exercise, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+  </div>
 </div>
