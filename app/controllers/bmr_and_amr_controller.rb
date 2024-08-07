@@ -2,7 +2,9 @@ class BmrAndAmrController < ApplicationController
     before_action :authenticate_user!
   
     def new
-      # Optional: Initialize any necessary variables or set up the form
+      # Initialize BMR and AMR to nil to avoid errors when the form is initially loaded
+      @bmr = nil
+      @amr = nil
     end
   
     def calculate
@@ -19,7 +21,7 @@ class BmrAndAmrController < ApplicationController
                447.593 + (9.247 * weight) + (3.096 * height) - (4.330 * age)
              end
   
-      # Calculate AMR using switch-case for activity levels 
+      # Calculate AMR using switch-case for activity levels
       @amr = case activity_level
              when 'Sedentary'
                @bmr * 1.2

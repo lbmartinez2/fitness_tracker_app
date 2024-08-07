@@ -1,39 +1,45 @@
 <!-- app/views/bmr_and_amr/new.html.erb -->
 <h1>BMR and AMR Calculator</h1>
 
-<%= form_with url: calculate_bmr_and_amr_path, method: :post, local: true do |f| %>
+<%= form_with url: calculate_bmr_and_amr_path, method: :post, local: true do %>
   <div>
-    <%= f.label :weight, "Weight (kg)" %>
-    <%= f.number_field :weight, required: true, value: current_user.weight %>
+    <%= label_tag :weight, "Weight (kg)" %>
+    <%= number_field_tag :weight, current_user.weight, required: true, readonly: true %>
   </div>
 
   <div>
-    <%= f.label :height, "Height (cm)" %>
-    <%= f.number_field :height, required: true, value: current_user.height %>
+    <%= label_tag :height, "Height (cm)" %>
+    <%= number_field_tag :height, current_user.height, required: true, readonly: true %>
   </div>
 
   <div>
-    <%= f.label :age, "Age" %>
-    <%= f.number_field :age, required: true, value: current_user.age %>
+    <%= label_tag :age, "Age" %>
+    <%= number_field_tag :age, current_user.age, required: true, readonly: true %>
   </div>
 
   <div>
-    <%= f.label :gender, "Gender" %>
-      <%= f.select :gender, [['Select Gender', ''], ['Male', 'male'], ['Female', 'female'], ['Other', 'other']], { required: true, selected: current_user.sex } %>
+    <%= label_tag :gender, "Gender" %>
+    <%= select_tag :gender, options_for_select([['Select Gender', ''], ['Male', 'male'], ['Female', 'female'], ['Other', 'other']], selected: current_user.sex), disabled: true %>
   </div>
 
   <div>
-    <%= f.label :activity_level_factor, "Activity Level" %>
-    <%= f.select :activity_level_factor, [
-      ['Sedentary', 1.2], 
-      ['Low Active', 1.375], 
-      ['Moderately Active', 1.55], 
-      ['Active', 1.725], 
-      ['Extremely Active', 1.9]
-    ], { required: true } %>
+    <%= label_tag :activity_level, "Activity Level" %>
+    <%= select_tag :activity_level, options_for_select([
+      ['Sedentary', 'Sedentary'], 
+      ['Low Active', 'Low Active'], 
+      ['Moderately Active', 'Moderately Active'], 
+      ['Active', 'Active'], 
+      ['Very Active', 'Very Active']
+    ], selected: current_user.current_activity_level), required: true %>
   </div>
 
   <div class="actions">
     <%= submit_tag "Calculate" %>
   </div>
+<% end %>
+
+<% if @bmr && @amr %>
+  <h2>Results</h2>
+  <p>BMR: <%= @bmr %></p>
+  <p>AMR: <%= @amr %></p>
 <% end %>
