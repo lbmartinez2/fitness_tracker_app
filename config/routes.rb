@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :exercises
+  resources :consumptions
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -10,7 +12,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do  
     get '/users/sign_out' => 'devise/sessions#destroy'     
- end
+  end
 
   namespace :api do
     get '/nutrition_facts/:query', to: 'nutrition_facts#index'
@@ -22,6 +24,11 @@ Rails.application.routes.draw do
   get 'bmr_and_amr/new', to: 'bmr_and_amr#new', as: 'new_bmr_and_amr'
   post 'bmr_and_amr/calculate', to: 'bmr_and_amr#calculate', as: 'calculate_bmr_and_amr'
   get 'bmr_and_amr/show', to: 'bmr_and_amr#show', as: 'show_bmr_and_amr'
+
+
+  get 'portfolio', to: 'portfolio#index'
+  get 'portfolio/daily', to: 'portfolio#daily'
+  get 'portfolio/weekly', to: 'portfolio#weekly'
   # Defines the root path route ("/")
   root "home#index"
 end

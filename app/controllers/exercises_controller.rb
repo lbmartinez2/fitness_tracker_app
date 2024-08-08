@@ -1,5 +1,5 @@
 class ExercisesController < ApplicationController
-  before_action :set_exercise, only: %i[ show edit update destroy]
+  before_action :set_exercise, only: %i[show edit update destroy]
 
   # GET /exercises or /exercises.json
   def index
@@ -14,9 +14,19 @@ class ExercisesController < ApplicationController
   # GET /exercises/new
   def new
     @exercise = current_user.exercises.build
+
+    if params[:searched_exercise].present?
+      @searched_exercise = params[:searched_exercise]
+
+      @exercise.attributes = {
+        exercise_type: @searched_exercise["name"].titleize,
+        duration: @searched_exercise["duration_min"],
+        calories_burnt: @searched_exercise["nf_calories"]
+      }
+    else
+      @searched_exercise = nil
+    end
   end
-
-
 
   # GET /exercises/1/edit
   def edit
@@ -61,9 +71,12 @@ class ExercisesController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_exercise
       @exercise = Exercise.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to exercises_path, alert: "Exercise not found."
     end
 
     # Only allow a list of trusted parameters through.
@@ -73,6 +86,6 @@ class ExercisesController < ApplicationController
 
     def search_exercise(name)
       data = Nutritionix::Client.exercise(name)
-      data[:data].first[1][0]
+      data[:data].first[1] ? data[:data].first[1][0] : nil
     end
 end
