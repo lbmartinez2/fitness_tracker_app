@@ -7,8 +7,10 @@ class Consumption < ApplicationRecord
     
       # Determine the status of water intake
       def self.water_intake_status(user_id, date)
-        # Assuming there's a `water_glasses` column to track daily water intake
-        water_glasses = where(user_id: user_id, "DATE(created_at) = ?", date).sum(:water_glasses)
+        # Using raw SQL to compare dates
+        water_glasses = where(user_id: user_id)
+                          .where("DATE(created_at) = ?", date.to_date)
+                          .sum(:water_glasses)
         water_glasses >= 8 ? "Goal met" : "Goal not met"
       end
     

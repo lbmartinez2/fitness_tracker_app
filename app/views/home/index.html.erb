@@ -1,51 +1,32 @@
-
-# <% if user_signed_in? %>
-#   <%= link_to "Sign Out", destroy_user_session_path, class:"btn btn-primary" %>
-#   <%= link_to "Exercise", new_exercise_path , class:"btn btn-primary" %>
-#   <%= link_to "Meal", new_bmr_and_amr_path, class:"btn btn-primary" %>
-#     <%= current_user.email %>
-#     <%= current_user.exercises %>
-# <% else %>
-#   <%= link_to "Sign In", new_user_session_path, class:"btn btn-primary" %>
-# <% end %>
-
 <% if user_signed_in? %>
-  <%= link_to "Sign Out", destroy_user_session_path, class:"btn btn-primary" %>
-  <%= link_to "Exercise", exercises_path , class:"btn btn-primary" %>
-  <%= link_to "Meal", "#", class:"btn btn-primary" %>
-    <%= current_user.email %>
-    <ul>
+  <%= link_to "Sign Out", destroy_user_session_path, class: "btn btn-primary" %>
+  <%= link_to "Exercise", exercises_path, class: "btn btn-primary" %>
+  <%= link_to "Meal", "#", class: "btn btn-primary" %>
+
+  <p>Email: <%= current_user.email %></p>
+
+  <p>Exercises:</p>
+  <ul>
     <% current_user.exercises.each_with_index do |exercise, index| %>
-      <li><%= "Exercise #{index +1}: #{exercise.exercise_type}"%>
-      <%= "Duration: #{exercise.duration} min"%>
-      <%= "Calories Burnt: #{exercise.calories_burnt} kcal"%>
-      <% end %>
+      <li>
+        <%= "Exercise #{index + 1}: #{exercise.exercise_type}" %><br>
+        <%= "Duration: #{exercise.duration} min" %><br>
+        <%= "Calories Burnt: #{exercise.calories_burnt} kcal" %>
       </li>
-      </ul>
+    <% end %>
+  </ul>
 
-      <ul>
+  <p>Meals:</p>
+  <ul>
     <% current_user.consumptions.each_with_index do |consumption, index| %>
-      <li><%= "Food #{index +1}: #{consumption.food_name}"%>
-      <%= "Date: #{consumption.date}"%>
-      <%= "Calories: #{consumption.calories} kcal"%>
-      <% end %>
+      <li>
+        <%= "Food #{index + 1}: #{consumption.food_name}" %><br>
+        <%= "Date: #{consumption.date}" %><br>
+        <%= "Calories: #{consumption.calories} kcal" %>
       </li>
-      </ul>
+    <% end %>
+  </ul>
 <% else %>
-  <%= link_to "Sign In", new_user_session_path, class:"btn btn-primary" %>
-<% end %>
-
-  <div>
-    <p>Email: <%= current_user.email %></p>
-    <p>Exercises:</p>
-    <ul>
-      <% current_user.exercises.each do |exercise| %>
-        <li><%= exercise.name %></li>
-      <% end %>
-    </ul>
-  </div>
-<% else %>
-  <!-- Show sign-in/sign-up links if the user is not signed in -->
   <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary" %>
   <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
 <% end %>
