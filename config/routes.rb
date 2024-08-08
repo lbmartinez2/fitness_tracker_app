@@ -30,5 +30,6 @@ Rails.application.routes.draw do
   get 'portfolio/daily', to: 'portfolio#daily'
   get 'portfolio/weekly', to: 'portfolio#weekly'
   # Defines the root path route ("/")
+  get 'landing_page', to: 'landing_page#new
   root "home#index"
 end

@@ -1,27 +1,78 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <a class="navbar-brand" href="#">My Fitness Pal</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Fitness Pal</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .centered-image {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+</head>
+<body>
 
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <%= link_to "Home", root_path, class:"nav-link"%>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Exercises", exercises_path, class:"nav-link"%>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Consumptions", consumptions_path, class:"nav-link"%>
-      </li>
-      <li class="nav-item">
-        <%= link_to "BMR&AMR Calculator", new_bmr_and_amr_path, class:"nav-link"%>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">My Fitness Pal</a>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <%= link_to "Home", root_path, class:"nav-link"%>
+                </li>
+                <li class="nav-item">
+                    <%= link_to "Exercises", exercises_path, class:"nav-link"%>
+                </li>
+                <li class="nav-item">
+                    <%= link_to "Consumptions", consumptions_path, class:"nav-link"%>
+                </li>
+                <li class="nav-item">
+                    <%= link_to "BMR&AMR Calculator", new_bmr_and_amr_path, class:"nav-link"%>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0 mr-2">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+
+            <ul class="navbar-nav">
+                <% if user_signed_in? %>
+                    <li class="nav-item">
+                        <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+                    </li>
+                <% else %>
+                    <li class="nav-item">
+                        <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
+                    </li>
+                <% end %>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Centered Image -->
+    <% unless user_signed_in? %>
+    <div class="content">
+        <img src="https://www.merrell.com/on/demandware.static/-/Sites-merrell_fr-Library/default/dw001ad0a0/content/seasonal-content/landing-pages/strava/2023/08/17/images/hero-d.jpg" alt="Landing Page Image" class="centered-image">
+    </div>
+    <% end %>
+
+</body>
+</html>

@@ -1,5 +1,4 @@
 <% if user_signed_in? %>
-  <%= link_to "Sign Out", destroy_user_session_path, class: "btn btn-primary" %>
   <%= link_to "Exercise", exercises_path, class: "btn btn-primary" %>
   <%= link_to "Meal", "#", class: "btn btn-primary" %>
 
@@ -27,6 +26,5 @@
     <% end %>
   </ul>
 <% else %>
-  <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary" %>
-  <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+ 
 <% end %>
