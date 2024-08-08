@@ -1,0 +1,23 @@
+<h1 class="mb-4">Daily Macros</h1>
+
+<%= form_with url: portfolio_daily_path, method: :get, local: true, class: 'mb-4' do %>
+  <div class="form-group">
+    <label for="date" class="form-label">Select Date:</label>
+    <%= date_field_tag :date, params[:date] || Date.today, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= submit_tag "Show Macros", class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<!-- Pie Chart -->
+<%= pie_chart @macros_data,
+  title: "Macros Breakdown",
+  class: 'box',
+  theme: 'sakura',
+  options: {
+    tooltip: {
+      valueFormatter: RailsCharts.js("(value) => value.toFixed(2)")
+    }
+  }
+%>

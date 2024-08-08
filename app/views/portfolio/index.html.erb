@@ -1,0 +1,81 @@
+<h1 class="mb-4">Fitness Journey Dashboard</h1>
+
+<div class="container">
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <h3>User Information</h3>
+      <p><strong>Email:</strong> <%= current_user.email %></p>
+    </div>
+    <div class="col-md-6">
+      <h3>Fitness Journey Data</h3>
+      <p><strong>Fitness Journey Started:</strong> <%= @start_date %></p>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="btn-group" role="group" aria-label="View Options">
+        <%= button_to 'Detailed View', portfolio_path(view: 'detailed'), method: :get, class: 'btn btn-primary' %>
+        <%= button_to 'Summarized View', portfolio_path(view: 'summarized'), method: :get, class: 'btn btn-secondary' %>
+      </div>
+    </div>
+  </div>
+
+  <% if @view == 'summarized' %>
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <h3>Summarized Exercises</h3>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <strong>Total Exercises:</strong> <%= @total_exercises_count %>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <h3>Summarized Consumptions</h3>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <strong>Total Calories Consumed:</strong> <%= @total_calories %> kcal
+          </li>
+        </ul>
+      </div>
+    </div>
+  <% else %>
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <h3>Detailed Exercises</h3>
+        <ul class="list-group">
+          <% if @exercises.present? %>
+            <% @exercises.each do |exercise| %>
+              <li class="list-group-item">
+                <strong><%= exercise.exercise_type %></strong>
+              </li>
+            <% end %>
+          <% else %>
+            <li class="list-group-item">No exercises found.</li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <h3>Detailed Consumptions</h3>
+        <ul class="list-group">
+          <% if @consumptions.present? %>
+            <% @consumptions.each do |consumption| %>
+              <li class="list-group-item">
+                <strong><%= consumption.food_name || 'Unnamed' %></strong> - <%= consumption.calories %> kcal
+              </li>
+            <% end %>
+          <% else %>
+            <li class="list-group-item">No consumptions found.</li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+</div>
