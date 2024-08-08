@@ -8,6 +8,8 @@ class BmrAndAmrController < ApplicationController
     end
   
     def calculate
+     # Update the user's weight in the database
+      if current_user.update(weight: params[:weight])
       weight = current_user.weight
       height = current_user.height
       age = current_user.age
