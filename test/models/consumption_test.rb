@@ -1,12 +1,8 @@
-# spec/models/consumption_spec.rb
-
 require 'rails_helper'
 
 RSpec.describe Consumption, type: :model do
-  # Define example data
   let(:consumption) { build(:consumption) }
 
-  # Test validations
   it 'is valid with valid attributes' do
     expect(consumption).to be_valid
   end
@@ -21,13 +17,12 @@ RSpec.describe Consumption, type: :model do
     expect(consumption).not_to be_valid
   end
 
-  # Test methods
   describe '.total_calories_for_day' do
     it 'calculates total calories for a specific day' do
       user = create(:user)
       create(:consumption, user: user, date: Date.today, calories: 500)
       create(:consumption, user: user, date: Date.today, calories: 300)
-
+      
       expect(Consumption.total_calories_for_day(Date.today)).to eq(800)
     end
   end
