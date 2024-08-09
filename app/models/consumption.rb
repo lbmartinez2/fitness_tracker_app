@@ -1,9 +1,9 @@
 class Consumption < ApplicationRecord
   belongs_to :user
-
+  validates :user, presence: true
   validates :food_name, presence: true
   validates :date, presence: true
-  validates :calories, numericality: { greater_than_or_equal_to: 0 }
+  validates :calories, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   def self.total_calories_for_day(date)
     where("DATE(created_at) = ?", date).sum(:calories)

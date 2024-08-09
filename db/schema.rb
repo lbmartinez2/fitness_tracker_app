@@ -63,6 +63,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_09_181403) do
     t.string "weight_loss_reason"
     t.boolean "subscribe_to_updates"
     t.string "name"
+    t.float "current_weight"
+    t.float "amr"
+    t.float "bmr"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

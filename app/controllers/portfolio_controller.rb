@@ -14,7 +14,8 @@ class PortfolioController < ActionController::Base
 
   def daily
       selected_date = params[:date].present? ? Date.parse(params[:date]) : Date.today
-
+      # @amr = current_user.amr
+      # @bmr = current_user.bmr
       @consumptions = current_user.consumptions.where(date: selected_date)
   
       @macros_data = @consumptions.each_with_object(Hash.new(0)) do |consumption, hash|

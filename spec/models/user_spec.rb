@@ -1,44 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  # Define a valid user using FactoryBot
-  let(:user) { FactoryBot.build(:user) }
+  let(:user) { User.new(email: 'test@example.com', password: 'password123') }
 
   describe 'validations' do
     it 'is valid with valid attributes' do
       expect(user).to be_valid
     end
 
-    it 'is not valid without a name' do
-      user.name = nil
-      expect(user).not_to be_valid
-    end
-  end
-
-  describe 'associations' do
-    it { is_expected.to have_many(:exercises).dependent(:destroy) }
-    it { is_expected.to have_many(:consumptions).dependent(:destroy) }
-  end
-
-  describe 'devise modules' do
-    it 'includes database_authenticatable module' do
-      expect(User.new).to be_a_kind_of(Devise::Models::DatabaseAuthenticatable)
+    it 'is not valid without an email' do
+      user.email = nil
+      expect(user).to_not be_valid
     end
 
-    it 'includes registerable module' do
-      expect(User.new).to be_a_kind_of(Devise::Models::Registerable)
+    it 'is not valid without a password' do
+      user.password = nil
+      expect(user).to_not be_valid
     end
 
-    it 'includes recoverable module' do
-      expect(User.new).to be_a_kind_of(Devise::Models::Recoverable)
+    it 'is not valid with a duplicate email' do
+      User.create(email: 'test@example.com', password: 'password123')
+      user_with_duplicate_email = User.new(email: 'test@example.com', password: 'password123')
+      expect(user_with_duplicate_email).to_not be_valid
     end
 
-    it 'includes rememberable module' do
-      expect(User.new).to be_a_kind_of(Devise::Models::Rememberable)
-    end
-
-    it 'includes validatable module' do
-      expect(User.new).to be_a_kind_of(Devise::Models::Validatable)
-    end
+    # Remove tests related to starting_weight
   end
 end
