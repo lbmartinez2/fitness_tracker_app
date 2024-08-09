@@ -1,5 +1,7 @@
 class ExercisesController < ApplicationController
+  before_action :authenticate_user!  
   before_action :set_exercise, only: %i[show edit update destroy]
+  before_action :authorize_user!, only: %i[show edit update destroy]
 
   # GET /exercises or /exercises.json
   def index
@@ -87,5 +89,10 @@ class ExercisesController < ApplicationController
     def search_exercise(name)
       data = Nutritionix::Client.exercise(name)
       data[:data].first[1] ? data[:data].first[1][0] : nil
+    end
+
+    
+    def authorize_user!
+      redirect_to exercises_path, alert: "You are not authorized to perform this action." unless @exercise.user == current_user
     end
 end

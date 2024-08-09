@@ -19,9 +19,9 @@
   </div>
 
   <div class="field">
-    <%= f.label :birthday %>
-    <%= f.date_select :birthday %>
-  </div>
+  <%= f.label :birthday %>
+  <%= f.date_select :birthday, start_year: 1970, end_year: Date.today.year %>
+</div>
 
   <div class="field">
     <%= f.label :height %>

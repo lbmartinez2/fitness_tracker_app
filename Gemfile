@@ -73,3 +73,10 @@ gem 'rails_charts'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 
+group :development, :test do
+  gem 'rspec-rails'
+end
+
+group :development, :test do
+  gem 'factory_bot_rails'
+end

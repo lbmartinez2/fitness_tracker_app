@@ -1,5 +1,7 @@
 class ConsumptionsController < ApplicationController
+  before_action :authenticate_user! 
   before_action :set_consumption, only: %i[ show edit update destroy ]
+  before_action :authorize_user!, only: %i[ show edit update destroy ]
 
   # GET /consumptions or /consumptions.json
   def index
@@ -36,7 +38,7 @@ class ConsumptionsController < ApplicationController
   # POST /consumptions or /consumptions.json
   def create
     @consumption = current_user.consumptions.build(consumption_params)
-Rails.logger.debug "Consumption params: #{consumption_params.inspect}"
+    Rails.logger.debug "Consumption params: #{consumption_params.inspect}"
     respond_to do |format|
       if @consumption.save
         format.html { redirect_to consumption_url(@consumption), notice: "Consumption was successfully created." }
@@ -98,5 +100,10 @@ Rails.logger.debug "Consumption params: #{consumption_params.inspect}"
   def search_consumption(name)
     data = CalorieNinjas::Client.nutrition_facts(name)
     data[:data]["items"]
+  end
+
+  
+  def authorize_user!
+    redirect_to consumptions_path, alert: "You are not authorized to perform this action." unless @consumption.user == current_user
   end
 end
