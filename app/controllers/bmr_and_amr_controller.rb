@@ -47,14 +47,14 @@ class BmrAndAmrController < ApplicationController
     @amr = amr.round
   
     if current_user.update_without_password(current_weight: weight, bmr: @bmr, amr: @amr)
-      Rails.logger.debug "User updated successfully: #{current_user.inspect}"
+     
       current_user.reload
       respond_to do |format|
         format.html { render :new }
         format.json { render json: { bmr: @bmr, amr: @amr } }
       end
     else
-      Rails.logger.debug "Failed to update user: #{current_user.errors.full_messages}"
+ 
       flash[:error] = "Failed to update user information."
       render :new
     end
