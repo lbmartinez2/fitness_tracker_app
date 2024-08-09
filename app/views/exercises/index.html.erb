@@ -5,7 +5,7 @@
 <%= form_with(url: exercises_path, method: :get, local: true) do |search_form| %>
   <div class="form-group">
     <% search_form.label :q, "Search Exercise", class: "control-label" %>
-    <%= search_form.text_field :q, class: "form-control", placeholder:"Search Exercise..." %>
+    <%= search_form.text_field :q, class: "form-control", placeholder:"e.g. 40 minutes walking, 2 hr jogging" %>
   </div>
 
   <div class="form-group d-flex justify-content-between align-items-center">
