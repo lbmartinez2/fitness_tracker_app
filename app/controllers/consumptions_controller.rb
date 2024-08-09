@@ -3,7 +3,7 @@ class ConsumptionsController < ApplicationController
 
   # GET /consumptions or /consumptions.json
   def index
-    @consumptions = Consumption.all
+    @consumptions = current_user.consumptions
     @searched_consumptions = search_consumption(params[:q])
   end
 
@@ -75,7 +75,7 @@ Rails.logger.debug "Consumption params: #{consumption_params.inspect}"
 
   # Use callbacks to share common setup or constraints between actions.
   def set_consumption
-    @consumption = Consumption.find(params[:id])
+    @consumption = current_user.consumptions.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

@@ -10,6 +10,10 @@
   </div>
 <% end %>
 
+<div class="alert alert-info">
+  <strong>Total Calories for <%= params[:date] || Date.today %>:</strong> <%= @total_calories %> kcal
+</div>
+
 <!-- Pie Chart -->
 <%= pie_chart @macros_data,
   title: "Macros Breakdown",
