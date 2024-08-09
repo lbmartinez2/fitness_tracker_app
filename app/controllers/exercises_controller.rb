@@ -4,7 +4,7 @@ class ExercisesController < ApplicationController
   # GET /exercises or /exercises.json
   def index
     @searched_exercise = search_exercise(params[:q])
-    @exercises = Exercise.all
+    @exercises = current_user.exercises
   end
 
   # GET /exercises/1 or /exercises/1.json
@@ -74,7 +74,7 @@ class ExercisesController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_exercise
-      @exercise = Exercise.find(params[:id])
+      @exercise = current_user.exercises.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       redirect_to exercises_path, alert: "Exercise not found."
     end
