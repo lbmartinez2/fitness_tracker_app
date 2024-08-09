@@ -1,3 +1,4 @@
+<% if user_signed_in? %>
 
 <h1 class="text-center mb-4 mt-3">Welcome to Your Fitness Journey, <%= current_user.name %>!</h1>
 
@@ -39,3 +40,5 @@
     </div>
   </div>
 </div>
+
+<% end %>
