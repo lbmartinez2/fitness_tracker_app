@@ -3,15 +3,12 @@ class PortfolioController < ActionController::Base
   
   layout "application"
   def index
-    @view = params[:view] || 'detailed'
     @exercises = current_user.exercises
     @consumptions = current_user.consumptions
     @start_date = current_user.created_at.to_date.strftime('%B %d, %Y')
-  
-    if @view == 'summarized'
-      @total_exercises_count = @exercises.count
-      @total_calories = @consumptions.sum(&:calories)
-    end
+    @total_exercises_count = @exercises.count
+    @total_calories = @consumptions.sum(&:calories)
+
     console
   end
 
@@ -24,7 +21,7 @@ class PortfolioController < ActionController::Base
         next unless consumption.macros.present?
         macros = JSON.parse(consumption.macros)
         macros.except('serving_size_g', 'calories').each do |key, value|
-          formatted_key = key.gsub('_', ' ')
+          formatted_key = key.gsub('_', ' ').capitalize
    
           if value.is_a?(Numeric)
             if formatted_key.include?('mg')
@@ -38,6 +35,8 @@ class PortfolioController < ActionController::Base
 
       @date_range = (Date.today.beginning_of_month..Date.today.end_of_month).to_a
       @total_calories = @consumptions.sum(&:calories)
+      exercises = current_user.exercises.where("DATE(date) = ?", selected_date.to_s)
+      @total_exercise_calories = exercises.sum(&:calories_burnt)
       console
   end
 
@@ -56,3 +55,4 @@ class PortfolioController < ActionController::Base
     console
   end
 end
+

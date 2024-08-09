@@ -1,51 +1,73 @@
-<!-- app/views/bmr_and_amr/new.html.erb -->
-<h1>BMR and AMR Calculator</h1>
-<%= form_with url: calculate_bmr_and_amr_path, method: :post, local: true do %>
-  <div>
-    <%= label_tag :weight, "Weight (kg)" %>
-    <%= number_field_tag :weight, current_user.weight, required: true %>
+
+<h1 class="mb-4 text-center">BMR and AMR Calculator</h1>
+
+<%= form_with url: calculate_bmr_and_amr_path, method: :post, local: true, class: 'container' do %>
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= label_tag :weight, "Weight (kg)", class: 'form-label' %>
+        <%= number_field_tag :weight, current_user.weight, class: 'form-control', required: true %>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= label_tag :height, "Height (cm)", class: 'form-label' %>
+        <%= number_field_tag :height, current_user.height, class: 'form-control', required: true, readonly: true %>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= label_tag :age, "Age", class: 'form-label' %>
+        <%= number_field_tag :age, current_user.age, class: 'form-control', required: true %>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= label_tag :height, "Height (cm)" %>
-    <%= number_field_tag :height, current_user.height, required: true, readonly: true %>
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= label_tag :gender, "Gender", class: 'form-label' %>
+        <%= select_tag :gender, options_for_select([['Select Gender', ''], ['Male', 'male'], ['Female', 'female'], ['Other', 'other']], selected: current_user.sex), class: 'form-control', disabled: true %>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="form-group">
+        <%= label_tag :activity_level, "Activity Level", class: 'form-label' %>
+        <%= select_tag :activity_level, options_for_select([
+          ['Sedentary', 'Sedentary'], 
+          ['Low Active', 'Low Active'], 
+          ['Moderately Active', 'Moderately Active'], 
+          ['Active', 'Active'], 
+          ['Very Active', 'Very Active']
+        ], selected: current_user.current_activity_level), class: 'form-control', required: true %>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= label_tag :age, "Age" %>
-    <%= number_field_tag :age, current_user.age, required: true, readonly: true %>
-  </div>
-
-  <div>
-    <%= label_tag :gender, "Gender" %>
-    <%= select_tag :gender, options_for_select([['Select Gender', ''], ['Male', 'male'], ['Female', 'female'], ['Other', 'other']], selected: current_user.sex), disabled: true %>
-  </div>
-
-  <div>
-    <%= label_tag :activity_level, "Activity Level" %>
-    <%= select_tag :activity_level, options_for_select([
-      ['Sedentary', 'Sedentary'], 
-      ['Low Active', 'Low Active'], 
-      ['Moderately Active', 'Moderately Active'], 
-      ['Active', 'Active'], 
-      ['Very Active', 'Very Active']
-    ], selected: current_user.current_activity_level), required: true %>
-  </div>
-
-  <div class="actions">
-    <%= submit_tag "Calculate" %>
+  <div class="form-group text-center">
+    <%= submit_tag "Calculate", class: 'btn btn-primary' %>
   </div>
 <% end %>
 
 <% if @bmr && @amr %>
-  <h2>Results</h2>
-  
-  <p> The Basal Metabolic Rate (BMR) Calculator estimates your basal metabolic rate—the amount of energy expended while at rest in a neutrally temperate environment, and in a post-absorptive state (meaning that the digestive system is inactive, which requires about 12 hours of fasting).</p>
-  <p>BMR: <%= @bmr %> Calories/day</p>
-  
-  <p> Active Metabolic Rate (AMR) is the actual amount of calories you burn each day due to physical activities like going to the gym, aerobics, cooking, gardening, yoga and so on. Knowing your AMR is essential incase you want lose weight, stay fit and healthy or gain weight. Find below the Active Metaboilc Rate Caclculator, just as you wanted that uses the Harris-Benedict Equation.</p>
-  <p>AMR: <%= @amr %> Calories/day</p>
-  
+  <div class="container mt-4">
+    <h2 class="text-center">Results</h2>
 
+    <div class="alert alert-info">
+      <p class="h3"><strong>BMR:</strong> <%= @bmr %> Calories/day</p>
+      <div class="dropdown-divider"></div>
+      <p>The Basal Metabolic Rate (BMR) Calculator estimates your basal metabolic rate—the amount of energy expended while at rest in a neutrally temperate environment, and in a post-absorptive state (meaning that the digestive system is inactive, which requires about 12 hours of fasting).</p>
+      
+    </div>
 
+    <div class="alert alert-info">
+      <p class="h3"><strong>AMR:</strong> <%= @amr %> Calories/day</p>
+      <div class="dropdown-divider"></div>
+      <p>Active Metabolic Rate (AMR) is the actual amount of calories you burn each day due to physical activities like going to the gym, aerobics, cooking, gardening, yoga, and so on. Knowing your AMR is essential in case you want to lose weight, stay fit and healthy, or gain weight. Find below the Active Metabolic Rate Calculator, just as you wanted that uses the Harris-Benedict Equation.</p>
+      
+    </div>
+  </div>
 <% end %>

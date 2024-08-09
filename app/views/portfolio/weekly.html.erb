@@ -1,20 +1,21 @@
-<h1 class="mb-4">Weekly Consumption Data</h1>
+<h1 class="mb-4">Weekly Progress</h1>
 
 <%= form_with url: portfolio_weekly_path, method: :get, local: true, class: 'mb-4' do %>
-  <div class="form-group">
-    <label for="week_start" class="form-label">Select Week Start Date:</label>
+  <div class="input-group">
     <%= date_field_tag :week_start, params[:week_start] || Date.today.beginning_of_week(:sunday).to_s, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= submit_tag "Show Week", class: 'btn btn-primary' %>
+    <div class="input-group-append">
+      <%= submit_tag "Show Week", class: 'btn btn-primary' %>
+    </div>
   </div>
 <% end %>
 
-<div>
-  <p>Selected Week Range:</p>
+
+
+<div class="alert alert-secondary text-center mt-4">
+  <p class="h5">Selected Week Range:</p>
   <% start_date = Date.parse(params[:week_start] || Date.today.beginning_of_week(:sunday).to_s) %>
   <% end_date = start_date.end_of_week(:saturday) %>
-  <p><%= "#{start_date.strftime('%b %d')} - #{end_date.strftime('%b %d')}" %></p>
+  <p class="h4"><%= "#{start_date.strftime('%b %d')} - #{end_date.strftime('%b %d')}" %></p>
 </div>
 
 <%= bar_chart @consumptions_data,
