@@ -2,7 +2,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # Other associations and validations
+  
   has_many :exercises
   has_many :consumptions
 
