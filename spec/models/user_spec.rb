@@ -24,6 +24,5 @@ RSpec.describe User, type: :model do
       expect(user_with_duplicate_email).to_not be_valid
     end
 
-    # Remove tests related to starting_weight
   end
 end

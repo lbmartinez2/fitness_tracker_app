@@ -8,15 +8,16 @@ class BmrAndAmrController < ApplicationController
 
   def calculate
     weight = params[:current_weight] || current_user.current_weight || current_user.weight
+    weight = weight.to_f
     height = current_user.height
     age = current_user.age
     gender = params[:gender] || current_user.sex
     activity_level = params[:activity_level] || current_user.current_activity_level
 
     bmr = if gender == 'male'
-            88.362 + (13.397 * weight.to_f) + (4.799 * height) - (5.677 * age)
+            88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
           else
-            447.593 + (9.247 * weight.to_f) + (3.096 * height) - (4.330 * age)
+            447.593 + (9.247 * weight) + (3.096 * height) - (4.330 * age)
           end
 
     amr = case activity_level
@@ -36,21 +37,18 @@ class BmrAndAmrController < ApplicationController
 
     @bmr = bmr.round
     @amr = amr.round
-
-    current_user.assign_attributes(current_weight: weight, bmr: @bmr, amr: @amr)
-
-    if current_user.save(validate: false)
+  
+    if current_user.update_without_password(current_weight: weight, bmr: @bmr, amr: @amr)
+     
+      current_user.reload
       respond_to do |format|
-        format.html { redirect_to new_bmr_and_amr_path, notice: 'BMR and AMR successfully updated.' }
+        format.html { render :new }
         format.json { render json: { bmr: @bmr, amr: @amr } }
       end
     else
+ 
       flash[:error] = "Failed to update user information."
       render :new
     end
-  end
-
-  def show
-    # Implementation for showing results, if needed
   end
 end
