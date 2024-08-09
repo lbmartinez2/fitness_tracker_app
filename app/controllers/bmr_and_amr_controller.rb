@@ -12,19 +12,13 @@ class BmrAndAmrController < ApplicationController
     age = current_user.age
     gender = params[:gender] || current_user.sex
     activity_level = params[:activity_level] || current_user.current_activity_level
-  
-    Rails.logger.debug "Weight: #{weight}, Height: #{height}, Age: #{age}, Gender: #{gender}, Activity Level: #{activity_level}"
-  
-    # Calculate BMR
+
     bmr = if gender == 'male'
             88.362 + (13.397 * weight.to_f) + (4.799 * height) - (5.677 * age)
           else
             447.593 + (9.247 * weight.to_f) + (3.096 * height) - (4.330 * age)
           end
-  
-    Rails.logger.debug "Calculated BMR: #{bmr}"
-  
-    # Calculate AMR using switch-case for activity levels
+
     amr = case activity_level
           when 'Sedentary'
             bmr * 1.2
@@ -37,24 +31,26 @@ class BmrAndAmrController < ApplicationController
           when 'Very Active'
             bmr * 1.9
           else
-            bmr # Default to BMR if activity level is not recognized
+            bmr
           end
-  
-    Rails.logger.debug "Calculated AMR: #{amr}"
-  
+
     @bmr = bmr.round
     @amr = amr.round
-  
-    # Update user with calculated values
-    if current_user.update(current_weight: weight, bmr: @bmr, amr: @amr)
+
+    current_user.assign_attributes(current_weight: weight, bmr: @bmr, amr: @amr)
+
+    if current_user.save(validate: false)
       respond_to do |format|
-        format.html { render :new } # Render the form with the result
+        format.html { redirect_to new_bmr_and_amr_path, notice: 'BMR and AMR successfully updated.' }
         format.json { render json: { bmr: @bmr, amr: @amr } }
       end
     else
       flash[:error] = "Failed to update user information."
       render :new
     end
-    console
+  end
+
+  def show
+    # Implementation for showing results, if needed
   end
 end
