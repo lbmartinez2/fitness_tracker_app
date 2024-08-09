@@ -5,8 +5,8 @@
   <div class="row mb-3">
     <div class="col-md-4">
       <div class="form-group">
-        <%= label_tag :weight, "Weight (kg)", class: 'form-label' %>
-        <%= number_field_tag :weight, current_user.weight, class: 'form-control', required: true %>
+        <%= label_tag :current_weight, "Weight (kg)", class: 'form-label' %>
+        <%= number_field_tag :current_weight, current_user.current_weight || current_user.weight, class: 'form-control', required: true %>
       </div>
     </div>
 
@@ -71,3 +71,4 @@
     </div>
   </div>
 <% end %>
+
