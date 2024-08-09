@@ -1,19 +1,17 @@
-<div id="<%= dom_id(consumption) %>" class="card mb-3">
-  <div class="card-body">
+<div id="<%= dom_id(consumption) %>" class="card border-success mb-2">
+  <div class="card-header bg-success text-white">
+    <h5 class="card-title mb-0"><%= consumption.food_name %></h5>
+  </div>
+  <div class="card-body p-2">
+    <dl class="row mb-0 pl-3">
+      <dt class="col-sm-5 font-weight-bold">Date:</dt>
+      <dd class="col-sm-7 mb-1"><%= consumption.date %></dd>
 
-    
-    <p class="card-text">
-      <strong>Date:</strong> <%= consumption.date %>
-    </p>
-    <p class="card-text">
-      <strong>Food Name:</strong> <%= consumption.food_name %>
-    </p>
-    <p class="card-text">
-      <strong>Meal Type:</strong> <%= consumption.meal_type %>
-    </p>
+      <dt class="col-sm-5 font-weight-bold">Meal Type:</dt>
+      <dd class="col-sm-7 mb-1"><%= consumption.meal_type %></dd>
 
-    <p class="card-text">
-      <strong>Calories:</strong> <%= consumption.calories %>
-    </p>
+      <dt class="col-sm-5 font-weight-bold">Calories:</dt>
+      <dd class="col-sm-7 mb-0"><%= consumption.calories %> kcal</dd>
+    </dl>
   </div>
 </div>

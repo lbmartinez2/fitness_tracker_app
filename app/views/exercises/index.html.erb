@@ -1,19 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<p class="text-success"><%= notice %></p>
 
 <h1>Exercises</h1>
 
 <%= form_with(url: exercises_path, method: :get, local: true) do |search_form| %>
   <div class="form-group">
-    <% search_form.label :q, "Search Exercise", class: "control-label" %>
-    <%= search_form.text_field :q, class: "form-control", placeholder:"e.g. 40 minutes walking, 2 hr jogging" %>
+    <% search_form.label :q, "Search Exercise", class: "form-label" %>
+    <%= search_form.text_field :q, class: "form-control", placeholder: "e.g. 40 minutes walking, 2 hr jogging" %>
   </div>
-
   <div class="form-group d-flex justify-content-between align-items-center">
     <%= search_form.submit "Search", class: "btn btn-primary" %>
     <%= link_to "New custom exercise", new_exercise_path, class: "btn btn-secondary" %>
   </div>
 <% end %>
-
 
 <% if @searched_exercise.present? %>
   <div class="card border-success mt-4">
@@ -29,18 +27,29 @@
   </div>
 <% end %>
 
-
-
 <div id="exercises" class="mt-2">
   <% @exercises.each do |exercise| %>
-      <div class="card-body">
-        <%= render exercise %>
-        <p class="card-text">
-          <%= link_to "Show this exercise", exercise, class: "btn btn-info btn-sm mt-3" %>
-        </p>
- 
+    <div class="card border-secondary mb-2">
+      <div class="card-header bg-secondary text-white">
+        <h5 class="card-title mb-0"><%= exercise.exercise_type %></h5>
+      </div>
+      <div class="card-body pl-4">
+        <dl class="row my-0">
+          <dt class="col-sm-5 font-weight-bold">Date:</dt>
+          <dd class="col-sm-7 mb-1"><%= exercise.date %></dd>
+
+          <dt class="col-sm-5 font-weight-bold">Duration:</dt>
+          <dd class="col-sm-7 mb-1"><%= exercise.duration %> min</dd>
+
+          <dt class="col-sm-5 font-weight-bold">Calories:</dt>
+          <dd class="col-sm-7 mb-0"><%= exercise.calories_burnt %> kcal</dd>
+        </dl>
+      
+      </div>
+       
     </div>
+     <p class="card-text">
+          <%= link_to "Show this exercise", exercise, class: "btn btn-info btn-sm mt-1 mb-3" %>
+        </p>
   <% end %>
 </div>
-
-

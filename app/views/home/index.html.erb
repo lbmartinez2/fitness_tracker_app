@@ -1,31 +1,41 @@
 
-<% if user_signed_in? %>
-  <%= link_to "Exercise", exercises_path, class: "btn btn-primary" %>
-  <%= link_to "Meal", "#", class: "btn btn-primary" %>
+<h1 class="text-center mb-4 mt-3">Welcome to Your Fitness Journey, <%= current_user.name %>!</h1>
 
-  <p>Email: <%= current_user.email %></p>
+<div class="container">
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div class="card border-primary mb-3">
+        <div class="card-header bg-primary text-white">Get Started</div>
+        <div class="card-body">
+          <h5 class="card-title">Track Your Progress</h5>
+          <p class="card-text">Monitor your exercises, track your nutrition, and view your fitness journey to stay on top of your goals.</p>
+          <%= link_to 'View My Fitness Dashboard', portfolio_path, class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
 
-  <p>Exercises:</p>
-  <ul>
-    <% current_user.exercises.each_with_index do |exercise, index| %>
-      <li>
-        <%= "Exercise #{index + 1}: #{exercise.exercise_type}" %><br>
-        <%= "Duration: #{exercise.duration} min" %><br>
-        <%= "Calories Burnt: #{exercise.calories_burnt} kcal" %>
-      </li>
-    <% end %>
-  </ul>
+    <div class="col-md-6">
+      <div class="card border-success mb-3">
+        <div class="card-header bg-success text-white">BMR & AMR Calculator</div>
+        <div class="card-body">
+          <h5 class="card-title">Calculate Your Energy Needs</h5>
+          <p class="card-text">Use our BMR and AMR calculators to determine your daily calorie needs based on your activity level and goals.</p>
+          <%= link_to 'Calculate BMR & AMR', new_bmr_and_amr_path, class: 'btn btn-success' %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <p>Meals:</p>
-  <ul>
-    <% current_user.consumptions.each_with_index do |consumption, index| %>
-      <li>
-        <%= "Food #{index + 1}: #{consumption.food_name}" %><br>
-        <%= "Date: #{consumption.date}" %><br>
-        <%= "Calories: #{consumption.calories} kcal" %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
- 
-<% end %>
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card border-warning mb-3">
+        <div class="card-header bg-warning text-dark">Fitness Tips & Resources</div>
+        <div class="card-body">
+          <h5 class="card-title">Stay Informed and Inspired</h5>
+          <p class="card-text">Explore our collection of fitness tips, healthy recipes, and workout plans to keep you motivated on your fitness journey.</p>
+          <%= link_to 'Explore Tips & Resources', "#", class: 'btn btn-warning text-dark' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

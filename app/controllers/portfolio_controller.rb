@@ -3,15 +3,12 @@ class PortfolioController < ActionController::Base
   
   layout "application"
   def index
-    @view = params[:view] || 'detailed'
     @exercises = current_user.exercises
     @consumptions = current_user.consumptions
     @start_date = current_user.created_at.to_date.strftime('%B %d, %Y')
-  
-    if @view == 'summarized'
-      @total_exercises_count = @exercises.count
-      @total_calories = @consumptions.sum(&:calories)
-    end
+    @total_exercises_count = @exercises.count
+    @total_calories = @consumptions.sum(&:calories)
+
     console
   end
 
@@ -38,7 +35,8 @@ class PortfolioController < ActionController::Base
 
       @date_range = (Date.today.beginning_of_month..Date.today.end_of_month).to_a
       @total_calories = @consumptions.sum(&:calories)
-      @total_exercise = current_user.exercises.where(date: selected_date).sum(&:calories_burnt)
+      exercises = current_user.exercises.where("DATE(date) = ?", selected_date.to_s)
+      @total_exercise_calories = exercises.sum(&:calories_burnt)
       console
   end
 
@@ -57,3 +55,4 @@ class PortfolioController < ActionController::Base
     console
   end
 end
+
