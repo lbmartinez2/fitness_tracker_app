@@ -9,7 +9,6 @@ class PortfolioController < ActionController::Base
     @total_exercises_count = @exercises.count
     @total_calories = @consumptions.sum(&:calories)
 
-    console
   end
 
   def daily
@@ -38,7 +37,7 @@ class PortfolioController < ActionController::Base
       @total_calories = @consumptions.sum(&:calories)
       exercises = current_user.exercises.where("DATE(date) = ?", selected_date.to_s)
       @total_exercise_calories = exercises.sum(&:calories_burnt)
-      console
+
   end
 
   def weekly
@@ -53,7 +52,7 @@ class PortfolioController < ActionController::Base
                                        .transform_values { |consumptions| consumptions.sum(&:calories) }
 
     @consumptions_data = week_dates.merge(actual_data)
-    console
+
   end
 end
 
