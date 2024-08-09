@@ -7,11 +7,6 @@ class User < ApplicationRecord
   has_many :consumptions
 
   validates :email, presence: true, uniqueness: true
-<<<<<<< HEAD
-  validates :password, presence: true
-  
-  validates :bmr, :amr, numericality: true, allow_nil: true
-=======
   validates :password, presence: true, on: :create
   validates :bmr, numericality: { greater_than: 0 }, allow_nil: true
   validates :amr, numericality: { greater_than: 0 }, allow_nil: true
@@ -23,5 +18,5 @@ class User < ApplicationRecord
     clean_up_passwords
     result
   end
->>>>>>> origin/main
+
 end
