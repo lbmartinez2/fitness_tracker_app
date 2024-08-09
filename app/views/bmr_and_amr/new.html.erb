@@ -1,12 +1,9 @@
 <h1>BMR and AMR Calculator</h1>
 
 <%= form_with url: calculate_bmr_and_amr_path, method: :post, local: true do %>
-  <p>Hello <%= current_user.name %>! Your starting weight when you used this app was <%= current_user.weight %> Kilograms.</p>
- 
-
   <div>
-    <%= label_tag :weight, "Weight (kg)" %>
-    <%= number_field_tag :weight, current_user.weight, required: true %>
+    <%= label_tag :current_weight, "Current Weight (kg)" %>
+    <%= number_field_tag :current_weight, current_user.current_weight || current_user.weight, required: true %>
   </div>
 
   <div>
@@ -48,4 +45,21 @@
   
   <p>Active Metabolic Rate (AMR) is the actual amount of calories you burn each day due to physical activities like going to the gym, aerobics, cooking, gardening, yoga, and so on. Knowing your AMR is essential in case you want to lose weight, stay fit and healthy, or gain weight. Below is the Active Metabolic Rate Calculator, which uses the Harris-Benedict Equation.</p>
   <p>AMR: <%= @amr %> Calories/day</p>
+
+  <!-- Display additional information -->
+  <p>Your current weight: <%= current_user.current_weight %> kg</p>
+  <p>Your AMR: <%= current_user.amr %> Calories/day</p>
+  <p>Your BMR: <%= current_user.bmr %> Calories/day</p>
 <% end %>
+
+<% if @bmr && @amr %>
+  <h2>Results</h2>
+
+  <p>BMR: <%= @bmr %> Calories/day</p>
+  <p>AMR: <%= @amr %> Calories/day</p>
+
+  <p>Your current weight: <%= current_user.current_weight || "N/A" %> kg</p>
+  <p>Your AMR: <%= current_user.amr || "N/A" %> Calories/day</p>
+  <p>Your BMR: <%= current_user.bmr || "N/A" %> Calories/day</p>
+<% end %>
+
