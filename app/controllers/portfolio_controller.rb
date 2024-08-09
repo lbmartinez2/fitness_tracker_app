@@ -24,7 +24,7 @@ class PortfolioController < ActionController::Base
         next unless consumption.macros.present?
         macros = JSON.parse(consumption.macros)
         macros.except('serving_size_g', 'calories').each do |key, value|
-          formatted_key = key.gsub('_', ' ')
+          formatted_key = key.gsub('_', ' ').capitalize
    
           if value.is_a?(Numeric)
             if formatted_key.include?('mg')
@@ -38,6 +38,7 @@ class PortfolioController < ActionController::Base
 
       @date_range = (Date.today.beginning_of_month..Date.today.end_of_month).to_a
       @total_calories = @consumptions.sum(&:calories)
+      @total_exercise = current_user.exercises.where(date: selected_date).sum(&:calories_burnt)
       console
   end
 

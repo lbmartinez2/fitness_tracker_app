@@ -1,81 +1,88 @@
-<h1 class="mb-4">Fitness Journey Dashboard</h1>
+<h1 class="mb-4 mt-3 text-center">Fitness Journey Dashboard</h1>
 
 <div class="container">
+  <!-- User Information and Fitness Journey Data -->
   <div class="row mb-4">
     <div class="col-md-6">
-      <h3>User Information</h3>
-      <p><strong>Email:</strong> <%= current_user.email %></p>
+      <div class="card border-primary mb-3">
+        <div class="card-header bg-primary text-white">User Information</div>
+        <div class="card-body">
+          <h5 class="card-title">Email:</h5>
+          <p class="card-text"><%= current_user.email %></p>
+        </div>
+      </div>
     </div>
     <div class="col-md-6">
-      <h3>Fitness Journey Data</h3>
-      <p><strong>Fitness Journey Started:</strong> <%= @start_date %></p>
+      <div class="card border-success mb-3">
+        <div class="card-header bg-success text-white">Fitness Journey Data</div>
+        <div class="card-body">
+          <h5 class="card-title">Fitness Journey Started:</h5>
+          <p class="card-text"><%= @start_date %></p>
+        </div>
+      </div>
     </div>
   </div>
 
+  <!-- Button Group -->
   <div class="row mb-4">
-    <div class="col-md-12">
+    <div class="col-md-12 text-center">
       <div class="btn-group" role="group" aria-label="View Options">
-        <%= button_to 'Detailed View', portfolio_path(view: 'detailed'), method: :get, class: 'btn btn-primary' %>
-        <%= button_to 'Summarized View', portfolio_path(view: 'summarized'), method: :get, class: 'btn btn-secondary' %>
+        <%= button_to 'Edit Profile', edit_user_registration_path, method: :get, class: 'btn btn-primary mx-2' %>
       </div>
     </div>
   </div>
 
-  <% if @view == 'summarized' %>
-    <div class="row mb-4">
-      <div class="col-md-12">
-        <h3>Summarized Exercises</h3>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <strong>Total Exercises:</strong> <%= @total_exercises_count %>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="row mb-4">
-      <div class="col-md-12">
-        <h3>Summarized Consumptions</h3>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <strong>Total Calories Consumed:</strong> <%= @total_calories %> kcal
-          </li>
-        </ul>
-      </div>
-    </div>
-  <% else %>
-    <div class="row mb-4">
-      <div class="col-md-12">
-        <h3>Detailed Exercises</h3>
-        <ul class="list-group">
-          <% if @exercises.present? %>
+<div class="row mb-4">
+  <div class="col-md-12">
+    <div class="card border-info mb-3">
+      <div class="card-header bg-info text-white">Detailed Exercises</div>
+      <div class="card-body">
+        <% if @exercises.present? %>
+          <ul class="list-group list-group-flush">
             <% @exercises.each do |exercise| %>
-              <li class="list-group-item">
-                <strong><%= exercise.exercise_type %></strong>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 class="mb-1"><%= exercise.exercise_type %></h5>
+                  <small class="text-muted">Duration: <%= "#{exercise.duration} min" %></small>
+                </div>
+                <span class="badge bg-info text-light rounded-pill">
+                  <%= "#{exercise.duration} min" %>
+                </span>
               </li>
             <% end %>
-          <% else %>
-            <li class="list-group-item">No exercises found.</li>
-          <% end %>
-        </ul>
+          </ul>
+        <% else %>
+          <p class="text-center">No exercises found.</p>
+        <% end %>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="row mb-4">
-      <div class="col-md-12">
-        <h3>Detailed Consumptions</h3>
-        <ul class="list-group">
-          <% if @consumptions.present? %>
+
+<div class="row mb-4">
+  <div class="col-md-12">
+    <div class="card border-warning mb-3">
+      <div class="card-header bg-warning text-white">Detailed Consumptions</div>
+      <div class="card-body">
+        <% if @consumptions.present? %>
+          <ul class="list-group list-group-flush">
             <% @consumptions.each do |consumption| %>
-              <li class="list-group-item">
-                <strong><%= consumption.food_name || 'Unnamed' %></strong> - <%= consumption.calories %> kcal
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 class="mb-1"><%= consumption.food_name || 'Unnamed' %></h5>
+                  <small class="text-muted">Calories: <%= consumption.calories %> kcal</small>
+                </div>
+                <span class="badge bg-warning text-dark rounded-pill">
+                  <%= "#{consumption.calories} kcal" %>
+                </span>
               </li>
             <% end %>
-          <% else %>
-            <li class="list-group-item">No consumptions found.</li>
-          <% end %>
-        </ul>
+          </ul>
+        <% else %>
+          <p class="text-center">No consumptions found.</p>
+        <% end %>
       </div>
     </div>
-  <% end %>
+  </div>
 </div>
