@@ -8,6 +8,7 @@ class BmrAndAmrController < ApplicationController
 
   def calculate
     weight = params[:current_weight] || current_user.current_weight || current_user.weight
+    weight = weight.to_f
     height = current_user.height
     age = current_user.age
     gender = params[:gender] || current_user.sex
@@ -17,9 +18,9 @@ class BmrAndAmrController < ApplicationController
   
     # Calculate BMR
     bmr = if gender == 'male'
-            88.362 + (13.397 * weight.to_f) + (4.799 * height) - (5.677 * age)
+            88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
           else
-            447.593 + (9.247 * weight.to_f) + (3.096 * height) - (4.330 * age)
+            447.593 + (9.247 * weight) + (3.096 * height) - (4.330 * age)
           end
   
     Rails.logger.debug "Calculated BMR: #{bmr}"
@@ -45,16 +46,17 @@ class BmrAndAmrController < ApplicationController
     @bmr = bmr.round
     @amr = amr.round
   
-    # Update user with calculated values
-    if current_user.update(current_weight: weight, bmr: @bmr, amr: @amr)
+    if current_user.update_without_password(current_weight: weight, bmr: @bmr, amr: @amr)
+      Rails.logger.debug "User updated successfully: #{current_user.inspect}"
+      current_user.reload
       respond_to do |format|
-        format.html { render :new } # Render the form with the result
+        format.html { render :new }
         format.json { render json: { bmr: @bmr, amr: @amr } }
       end
     else
+      Rails.logger.debug "Failed to update user: #{current_user.errors.full_messages}"
       flash[:error] = "Failed to update user information."
       render :new
     end
-    console
   end
 end
