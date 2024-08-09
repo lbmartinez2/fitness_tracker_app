@@ -55,5 +55,6 @@ class BmrAndAmrController < ApplicationController
       flash[:error] = "Failed to update user information."
       render :new
     end
+    console
   end
 end
