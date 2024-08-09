@@ -7,8 +7,8 @@ FactoryBot.define do
   
       # Add any additional user attributes here
       # For example, if you have bmr and amr attributes
-      bmr { 1776 }
-      amr { 3063 }
+    #   bmr { 1776 }
+    #   amr { 3063 }
       activity_level { 'active' }
     end
 end

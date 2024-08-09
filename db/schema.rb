@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_06_102119) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_09_151205) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bmr_amr_records", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "date", null: false
+    t.float "bmr", null: false
+    t.float "amr", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "date"], name: "index_bmr_amr_records_on_user_id_and_date", unique: true
+    t.index ["user_id"], name: "index_bmr_amr_records_on_user_id"
+  end
 
   create_table "consumptions", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -67,6 +78,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_06_102119) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bmr_amr_records", "users"
   add_foreign_key "consumptions", "users"
   add_foreign_key "exercises", "users"
 end

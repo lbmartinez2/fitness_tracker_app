@@ -1,6 +1,9 @@
-<!-- app/views/bmr_and_amr/new.html.erb -->
 <h1>BMR and AMR Calculator</h1>
+
 <%= form_with url: calculate_bmr_and_amr_path, method: :post, local: true do %>
+  <p>Hello <%= current_user.name %>! Your starting weight when you used this app was <%= current_user.weight %> Kilograms.</p>
+ 
+
   <div>
     <%= label_tag :weight, "Weight (kg)" %>
     <%= number_field_tag :weight, current_user.weight, required: true %>
@@ -39,13 +42,10 @@
 
 <% if @bmr && @amr %>
   <h2>Results</h2>
-  
-  <p> The Basal Metabolic Rate (BMR) Calculator estimates your basal metabolic rate—the amount of energy expended while at rest in a neutrally temperate environment, and in a post-absorptive state (meaning that the digestive system is inactive, which requires about 12 hours of fasting).</p>
+
+  <p>The Basal Metabolic Rate (BMR) Calculator estimates your basal metabolic rate—the amount of energy expended while at rest in a neutrally temperate environment, and in a post-absorptive state (meaning that the digestive system is inactive, which requires about 12 hours of fasting).</p>
   <p>BMR: <%= @bmr %> Calories/day</p>
   
-  <p> Active Metabolic Rate (AMR) is the actual amount of calories you burn each day due to physical activities like going to the gym, aerobics, cooking, gardening, yoga and so on. Knowing your AMR is essential incase you want lose weight, stay fit and healthy or gain weight. Find below the Active Metaboilc Rate Caclculator, just as you wanted that uses the Harris-Benedict Equation.</p>
+  <p>Active Metabolic Rate (AMR) is the actual amount of calories you burn each day due to physical activities like going to the gym, aerobics, cooking, gardening, yoga, and so on. Knowing your AMR is essential in case you want to lose weight, stay fit and healthy, or gain weight. Below is the Active Metabolic Rate Calculator, which uses the Harris-Benedict Equation.</p>
   <p>AMR: <%= @amr %> Calories/day</p>
-  
-
-
 <% end %>
