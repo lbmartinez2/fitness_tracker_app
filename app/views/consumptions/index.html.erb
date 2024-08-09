@@ -4,8 +4,8 @@
 
 <%= form_with(url: consumptions_path, method: :get, local: true) do |search_form| %>
   <div class="form-group">
-    <%= search_form.label :q, "Search Food", class: "control-label" %>
-    <%= search_form.text_field :q, class: "form-control" %>
+    <% search_form.label :q, "Search Food", class: "control-label" %>
+    <%= search_form.text_field :q, class: "form-control", placeholder:"e.g. 2 pcs of bacon, 2 cups rice" %>
   </div>
   <div class="form-group">
     <%= search_form.submit "Search", class: "btn btn-primary" %>

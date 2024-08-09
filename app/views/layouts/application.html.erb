@@ -11,13 +11,14 @@
 
 </head>
 <body>
-   <%= render 'layouts/navbar' %>
-  <div class="container">
-   
-    <!-- Application Layout -->
+    <%= render 'layouts/navbar' %>
+    <%= render 'landing_page/new' if request.path == "/" && !user_signed_in? %>
+      <div class="container">
+      <!-- Application Layout -->
+      
+      <%= yield %>
+      </div>
 
-    <%= yield %>
-    </div>
   <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

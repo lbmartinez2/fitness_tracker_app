@@ -1,0 +1,68 @@
+<style>
+
+        .hero-section {
+            background: url('https://www.merrell.com/on/demandware.static/-/Sites-merrell_fr-Library/default/dw001ad0a0/content/seasonal-content/landing-pages/strava/2023/08/17/images/hero-d.jpg') no-repeat center center;
+            background-size: cover;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .section {
+            padding: 60px 0;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .section-content {
+            font-size: 1.25rem;
+        }
+        .cta-button {
+            margin-top: 20px;
+        }
+    </style>
+
+<section class="hero-section">
+    <div>
+        <h1>Welcome to Your Fitness Pal!</h1>
+        <p>Your journey to greater health starts here</p>
+        <%= link_to "Sign in here!", new_user_session_path, class:"btn btn-primary btn-lg cta-button" %>
+        
+    </div>
+</section>
+
+<section id="features" class="section bg-light">
+    <div class="container">
+        <h2 class="section-title text-center">Features</h2>
+        <div class="row">
+            <div class="col-md-4 text-center">
+              
+                  <h3>Food Tracker</h3>
+                  <p class="section-content">Easily track your daily food intake and monitor nutritional values with our intuitive Food Tracker. This feature allows you to log meals, track calories, and ensure you're meeting your dietary goals. Its user-friendly interface helps you make healthier food choices and stay on top of your nutrition.</p>
+              </div>
+              <div class="col-md-4 text-center">
+                  <h3>Exercise Tracker</h3>
+                  <p class="section-content">Stay motivated and achieve your fitness goals with the Exercise Tracker. Log your workouts, track progress, and analyze performance metrics. Whether you're hitting the gym or going for a run, this feature helps you monitor your activity levels and maintain an effective exercise routine.</p>
+              </div>
+              <div class="col-md-4 text-center">
+                  <h3>Document Your Journey</h3>
+                  <p class="section-content">Capture and reflect on your fitness journey with our documentation feature. Record milestones, set goals, and review your progress over time. This tool helps you stay inspired and committed by visualizing your achievements and planning for future improvements.</p>
+    
+        </div>
+    </div>
+</section>
+
+<section class="section bg-dark text-white">
+    <div class="container text-center">
+        <h2 class="section-title">Get Started Today</h2>
+        <p class="section-content">Join us and experience the best service ever. Don't miss out!</p>
+        <%= link_to "Sign up now!", new_user_registration_path, class:"btn btn-light btn-lg"  %>
+    </div>
+</section>
+
+<footer class="bg-dark text-white text-center py-3">
+    <p>&copy; 2024 Fitness Pal. All Rights Reserved.</p>
+</footer>

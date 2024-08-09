@@ -10,11 +10,6 @@
   </div>
 <% end %>
 
-<div class="alert alert-info">
-  <strong>Total Calories for <%= params[:date] || Date.today %>:</strong> <%= @total_calories %> kcal
-</div>
-
-<!-- Pie Chart -->
 <%= pie_chart @macros_data,
   title: "Macros Breakdown",
   class: 'box',
@@ -25,3 +20,9 @@
     }
   }
 %>
+
+<% if params[:date].present? %>
+  <p>Date Selected: <%= Date.parse(params[:date]).strftime('%a, %b %d, %Y') %></p>
+<% else %>
+  <p>Date Selected: <%= Date.today.strftime('%a, %b %d, %Y') %></p>
+<% end %>
