@@ -25,12 +25,19 @@ class PortfolioController < ActionController::Base
         macros = JSON.parse(consumption.macros)
         macros.except('serving_size_g', 'calories').each do |key, value|
           formatted_key = key.gsub('_', ' ')
-          hash[formatted_key] += value.to_f if value.is_a?(Numeric)
+   
+          if value.is_a?(Numeric)
+            if formatted_key.include?('mg')
+              hash[formatted_key.gsub('mg', 'g')] += value.to_f / 1000
+            else
+              hash[formatted_key] += value.to_f
+            end
+          end
         end
       end
-  
+
       @date_range = (Date.today.beginning_of_month..Date.today.end_of_month).to_a
-  
+      @total_calories = @consumptions.sum(&:calories)
       console
   end
 

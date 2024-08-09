@@ -5,7 +5,7 @@ class ConsumptionsController < ApplicationController
 
   # GET /consumptions or /consumptions.json
   def index
-    @consumptions = current_user.consumptions.all  # Only show the consumptions for the logged-in user
+    @consumptions = current_user.consumptions
     @searched_consumptions = search_consumption(params[:q])
   end
 
@@ -77,7 +77,7 @@ class ConsumptionsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_consumption
-    @consumption = current_user.consumptions.find(params[:id])  # Ensure the consumption belongs to the current user
+    @consumption = current_user.consumptions.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
