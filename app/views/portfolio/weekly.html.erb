@@ -9,13 +9,30 @@
   </div>
 <% end %>
 
-
-
-<div class="alert alert-secondary text-center mt-4">
+<div class="alert text-center mt-4">
   <p class="h5">Selected Week Range:</p>
   <% start_date = Date.parse(params[:week_start] || Date.today.beginning_of_week(:sunday).to_s) %>
   <% end_date = start_date.end_of_week(:saturday) %>
   <p class="h4"><%= "#{start_date.strftime('%b %d')} - #{end_date.strftime('%b %d')}" %></p>
+</div>
+
+<div class="row text-center mt-4">
+  <div class="col-md-6 mb-3">
+    <div class="card border-primary">
+      <div class="card-body">
+        <p class="display-3">AMR</p>
+        <p class="h2"><%= "#{@amr} kcal" %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 mb-3">
+    <div class="card border-primary">
+      <div class="card-body">
+        <p class="display-3">BMR</p>
+        <p class="h2"><%= "#{@bmr} kcal" %></p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <%= bar_chart @consumptions_data,

@@ -21,6 +21,21 @@
       </div>
       <% end %>
     </div>
+    <div class="col-md-12">
+      <% if @calorie_deficit > 100 %>
+        <div class="alert alert-info d-flex align-items-center justify-content-center">
+          <p class="h4 m-0">Calorie Deficit: <%= @calorie_deficit.round(2) %> kcal</p>
+        </div>
+        <% elsif @calorie_deficit <= 100 && @calorie_deficit > -100 %>
+        <div class="alert alert-warning d-flex align-items-center justify-content-center">
+          <p class="h4 m-0">Calorie Deficit: <%= @calorie_deficit.round(2) %> kcal</p>
+        </div>
+        <% else %>
+        <div class="alert alert-danger d-flex align-items-center justify-content-center">
+          <p class="h4 m-0">Calorie Deficit: <%= @calorie_deficit.round(2) %> kcal</p>
+        </div>
+      <% end %>
+    </div>
   </div>
 <div class="row mb-4">
   <div class="col-md-6">
@@ -29,7 +44,7 @@
     </div>
   </div>
   <div class="col-md-6">
-    <div class="alert alert-warning d-flex align-items-center justify-content-center">
+    <div class="alert alert-info d-flex align-items-center justify-content-center">
       <p class="h4 m-0">Total Exercise: <%= @total_exercise_calories %> kcal</p>
     </div>
   </div>

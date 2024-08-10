@@ -39,6 +39,7 @@ class PortfolioController < ActionController::Base
       @total_exercise_calories = exercises.sum(&:calories_burnt)
       @amr = current_user.amr || 0
       @bmr = current_user.bmr || 0
+      @calorie_deficit = @amr - @total_calories + @total_exercise_calories || 0
   end
 
   def weekly
@@ -53,6 +54,9 @@ class PortfolioController < ActionController::Base
                                        .transform_values { |consumptions| consumptions.sum(&:calories) }
 
     @consumptions_data = week_dates.merge(actual_data)
+
+    @amr = current_user.amr || 0
+    @bmr = current_user.bmr || 0
 
   end
 end
