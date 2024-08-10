@@ -8,9 +8,9 @@ class BmrAndAmrController < ApplicationController
 
   def calculate
     weight = params[:current_weight] || current_user.current_weight || current_user.weight
+    age = params[:age].to_f || current_user.age.to_f
     weight = weight.to_f
     height = current_user.height
-    age = current_user.age
     gender = params[:gender] || current_user.sex
     activity_level = params[:activity_level] || current_user.current_activity_level
 
@@ -38,7 +38,7 @@ class BmrAndAmrController < ApplicationController
     @bmr = bmr.round
     @amr = amr.round
   
-    if current_user.update_without_password(current_weight: weight, bmr: @bmr, amr: @amr)
+    if current_user.update_without_password(current_weight: weight, bmr: @bmr, amr: @amr, age: age)
      
       current_user.reload
       respond_to do |format|

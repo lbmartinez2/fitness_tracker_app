@@ -11,13 +11,13 @@
 
 <div class="row mb-1">
     <div class="col-md-12">
-      <% if @total_calories - @total_exercise_calories <= 1500 %>
+      <% if @total_calories - @total_exercise_calories <= @amr %>
       <div class="alert alert-success d-flex align-items-center justify-content-center">
-        <p class="h1">Total Calories: <%= @total_calories - @total_exercise_calories %> kcal</p>
+        <p class="h1">Total Calories: <%= (@total_calories - @total_exercise_calories).round(2) %> kcal</p>
       </div>
       <% else %>
       <div class="alert alert-danger d-flex align-items-center justify-content-center">
-        <p class="h1">Total Calories: <%= @total_calories - @total_exercise_calories %> kcal</p>
+        <p class="h1">Total Calories: <%= (@total_calories - @total_exercise_calories).round(2) %> kcal</p>
       </div>
       <% end %>
     </div>

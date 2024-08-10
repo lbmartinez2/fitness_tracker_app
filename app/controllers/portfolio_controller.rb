@@ -37,7 +37,8 @@ class PortfolioController < ActionController::Base
       @total_calories = @consumptions.sum(&:calories)
       exercises = current_user.exercises.where("DATE(date) = ?", selected_date.to_s)
       @total_exercise_calories = exercises.sum(&:calories_burnt)
-
+      @amr = current_user.amr || 0
+      @bmr = current_user.bmr || 0
   end
 
   def weekly
