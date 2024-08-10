@@ -38,7 +38,7 @@ class BmrAndAmrController < ApplicationController
     @bmr = bmr.round
     @amr = amr.round
   
-    if current_user.update_without_password(current_weight: weight, bmr: @bmr, amr: @amr, age: age)
+    if current_user.update_without_password(current_weight: weight, bmr: @bmr, amr: @amr, age: age, current_activity_level: activity_level)
      
       current_user.reload
       respond_to do |format|
